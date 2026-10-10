@@ -13,7 +13,9 @@ API_VERSION = "1.0"
 RETRIEVE_POOL_SIZE = 30  # CLAP candidates considered before blending
 DEFAULT_N = 10  # tracks returned for display
 MIN_N = 1
-MAX_N = 50
+#: Upper clamp only. Clients ask for "the whole library" by sending a large n;
+#: the engine still returns at most the candidate pool (30 with a query).
+MAX_N = 1000
 DEFAULT_ALPHA = 0.5  # 1.0 = pure phrase match, 0.0 = pure brain
 KC_DIM = 2000  # Kenyon cells (spec §7)
 PN_DIM = 50  # projection neurons

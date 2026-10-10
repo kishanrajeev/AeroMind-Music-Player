@@ -86,6 +86,7 @@ class Engine:
         self.brain: Brain = ensure_brain(
             self.index, path=self._brain_path, eta=eta, seed=seed
         )
+        self._brain_stamp = self._brain_mtime()
         log.info("brain ready: %d feedback signals", self.brain.feedback_count)
 
         self.processor, self.model, self.device = load_clap(device)
@@ -99,6 +100,24 @@ class Engine:
         log.info("engine ready on %s", self.device)
 
     # -- reads --------------------------------------------------------------
+    def _brain_mtime(self) -> int | None:
+        try:
+            return self._brain_path.stat().st_mtime_ns
+        except FileNotFoundError:
+            return None
+
+    def _sync_brain(self) -> None:
+        """Pick up brain.npz edits made by the CLI (reset / calibration) live.
+
+        Called under the brain lock. The file is written atomically, so a stat
+        plus reload is safe even if another process is writing it.
+        """
+        stamp = self._brain_mtime()
+        if stamp is not None and stamp != self._brain_stamp:
+            self.brain = ensure_brain(self.index, path=self._brain_path)
+            self._brain_stamp = self._brain_mtime()
+            log.info("brain reloaded from disk: %d feedback signals", self.brain.feedback_count)
+
     def library(self) -> list[Track]:
         return list(self.index.tracks)
 
@@ -108,6 +127,7 @@ class Engine:
     def brain_state(self, track_id: str) -> BrainState:
         row = self._row_by_id[track_id]  # KeyError -> caller maps to 404
         with self._brain_lock:
+            self._sync_brain()
             return self.brain.state(track_id, self.index.features[row])
 
     # -- main call ----------------------------------------------------------
@@ -130,6 +150,7 @@ class Engine:
         )
         clap_norm = np.array([c.clap_score for c in candidates], dtype=np.float64)
         with self._brain_lock:
+            self._sync_brain()
             brain_norm = minmax_normalize(self.brain.valences(features))
         final = blend(clap_norm, brain_norm, alpha)
 
@@ -165,7 +186,9 @@ class Engine:
         row = self._row_by_id[track_id]  # KeyError -> caller maps to 404
         features = self.index.features[row]
         with self._brain_lock:
+            self._sync_brain()
             self.brain.feedback(features, reward)
             if reward != 0:
                 self.brain.save(self._brain_path)
+                self._brain_stamp = self._brain_mtime()
             return self.brain.state(track_id, features)

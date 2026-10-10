@@ -49,7 +49,7 @@ class BrainMismatch(RuntimeError):
     """Cached brain does not match the current features/config — rebuild it."""
 
 
-def _library_features_hash(features: np.ndarray) -> str:
+def library_features_hash(features: np.ndarray) -> str:
     array = np.ascontiguousarray(np.asarray(features, dtype="<f4"))
     return hashlib.sha1(array.tobytes()).hexdigest()
 
@@ -108,7 +108,7 @@ class Brain:
             "kc_active_count": str(active),
             "feature_list_hash": feature_list_hash(),
             "feature_names": "|".join(FEATURE_NAMES),
-            "library_features_hash": _library_features_hash(features),
+            "library_features_hash": library_features_hash(features),
             "feedback_count": "0",
         }
         return cls(
@@ -245,7 +245,7 @@ def ensure_brain(
     force: bool = False,
 ) -> Brain:
     """Load a valid brain or create one (spec §9: mismatch -> rebuild)."""
-    library_hash = _library_features_hash(index.features)
+    library_hash = library_features_hash(index.features)
     if path.exists() and not force:
         try:
             return Brain.load(path, expected_library_hash=library_hash)

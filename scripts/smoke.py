@@ -19,7 +19,7 @@ REPO = Path(__file__).resolve().parent.parent
 if str(REPO) not in sys.path:
     sys.path.insert(0, str(REPO))
 
-from core.types import API_VERSION, DEFAULT_N, KC_DIM  # noqa: E402
+from core.types import API_VERSION, DEFAULT_N, KC_DIM, MAX_N  # noqa: E402
 
 BASE = (sys.argv[1] if len(sys.argv) > 1 else "http://127.0.0.1:8000").rstrip("/")
 FAILURES: list[str] = []
@@ -114,7 +114,7 @@ def main() -> int:
     code, clamped = request("GET", "/playlist?alpha=2.5&n=9999")
     check(
         "alpha and n clamped server-side",
-        code == 200 and clamped.get("alpha") == 1.0 and len(clamped.get("tracks", [])) <= 50,
+        code == 200 and clamped.get("alpha") == 1.0 and len(clamped.get("tracks", [])) <= MAX_N,
         f"{code} alpha={clamped.get('alpha') if clamped else None}",
     )
 

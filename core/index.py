@@ -3,7 +3,7 @@
 ``data/index.npz`` holds, aligned by row:
 
 - Track metadata (id, title, artist, duration, path)
-- 512-d CLAP audio embeddings: 3 segments -> mean-pool -> L2-normalize
+- 512-d CLAP audio embeddings: 5 segments -> mean-pool -> L2-normalize
 - raw 9-d brain features from core.library (so brain.py never re-decodes audio)
 - per-track segment offsets actually used
 
@@ -40,7 +40,7 @@ from core.library import (
 from core.types import Track
 
 MODEL_ID = "laion/clap-htsat-unfused"
-INDEX_VERSION = "index-1"
+INDEX_VERSION = "index-2"
 EMBEDDING_DIM = 512
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 INDEX_PATH = DATA_DIR / "index.npz"
@@ -198,7 +198,7 @@ def save_index(data: IndexData, path: Path = INDEX_PATH) -> None:
             track_ids=np.array([t.id for t in data.tracks]),
             titles=np.array([t.title for t in data.tracks]),
             artists=np.array([t.artist for t in data.tracks]),
-            durations=np.array([t.duration for t in data.tracks], dtype="float32"),
+            durations=np.array([t.duration for t in data.tracks], dtype="float64"),
             paths=np.array([t.path for t in data.tracks]),
             embeddings=data.embeddings.astype("float32"),
             features=data.features.astype("float32"),
@@ -221,6 +221,7 @@ def _validate(
         "feature_list_hash": feature_list_hash(),
         "sample_rate": str(SAMPLE_RATE),
         "segment_seconds": str(SEGMENT_SECONDS),
+        "segment_fractions": ",".join(f"{f:.3f}" for f in SEGMENT_FRACTIONS),
         "embedding_dim": str(EMBEDDING_DIM),
     }
     for key, want in expected.items():

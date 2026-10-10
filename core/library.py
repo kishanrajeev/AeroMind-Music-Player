@@ -9,10 +9,11 @@ The feature recipe is frozen by FEATURE_VERSION + FEATURE_NAMES. Changing either
 invalidates every brain.npz that stores ``feature_list_hash`` (spec §9): bump
 FEATURE_VERSION and rebuild the brain.
 
-Segment sampling matches the CLAP index recipe (spec §6): 10 s windows at
-25% / 50% / 75% of the track. Features are averaged across segments (tempo uses
-the median); key/mode are detected once from the mean chroma, and key is encoded
-as sin/cos so it stays non-circular when z-scored.
+Segment sampling matches the CLAP index recipe (spec §6): 5 windows of 10 s
+spread across the track (10/30/50/70/90%, clamped so each window fits).
+Features are averaged across segments (tempo uses the median); key/mode are
+detected once from the mean chroma, and key is encoded as sin/cos so it stays
+non-circular when z-scored.
 
 No CLAP here (index.py owns embeddings) and no z-scoring here (brain.py owns
 that, persisting mean/std in brain.npz per spec §7).
@@ -40,7 +41,9 @@ from core.types import Track
 
 SAMPLE_RATE = 48000
 SEGMENT_SECONDS = 10
-SEGMENT_FRACTIONS = (0.25, 0.50, 0.75)
+#: Five windows give a far better song-level view than three: a quiet intro, a
+#: loud chorus and a bridge no longer collapse into one texture.
+SEGMENT_FRACTIONS = (0.10, 0.30, 0.50, 0.70, 0.90)
 AUDIO_EXTENSIONS = {".flac", ".mp3", ".m4a", ".ogg", ".opus", ".wav"}
 
 FEATURE_VERSION = "feat-1"
@@ -147,7 +150,7 @@ def collect_paths(
 # audio loading
 # ---------------------------------------------------------------------------
 def segment_offsets(duration: float) -> list[float]:
-    """Window start offsets at 25/50/75% of the track, clamped so each 10 s window fits.
+    """Window start offsets spread across the track, each clamped to fit.
 
     Always returns ``len(SEGMENT_FRACTIONS)`` offsets so index arrays have a
     fixed shape; very short tracks just repeat the start.

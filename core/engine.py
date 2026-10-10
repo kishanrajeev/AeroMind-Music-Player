@@ -101,6 +101,7 @@ class Engine:
         self.encoder = QueryEncoder(self.processor, self.model, self.device)
         if warm:
             self.encoder.embed("warmup")  # first encode may be slow; do it now
+            self.encoder.hub_prior(self.index)
         self.index_loaded = True
 
         self._row_by_id = {track.id: i for i, track in enumerate(self.index.tracks)}

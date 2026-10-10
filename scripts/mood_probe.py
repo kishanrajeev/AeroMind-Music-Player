@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """CLAP mood-retrieval probe — G1 pre-check (spec §10 gate G1).
 
-Embeds a library sample with the exact 3-segment recipe index.py will use, then
+Embeds a library sample with the exact multi-segment recipe index.py will use, then
 ranks tracks for mood queries under several prompt phrasings. No server, no
 brain — it answers one question: does CLAP retrieve by mood on this library?
 

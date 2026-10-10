@@ -1,12 +1,14 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
-import Image from 'next/image'
 import { Search, X, Volume2, Music2 } from 'lucide-react'
-import { formatTime, type Song } from '@/lib/songs'
+import { fallbackCover, type Track } from '@/lib/api'
+import { formatTime } from '@/lib/songs'
+import { CoverImage } from './cover-image'
+import { ScoreBars } from './score-bars'
 
 type PlaylistProps = {
-  songs: Song[]
+  songs: Track[]
   totalCount: number
   query: string
   onQueryChange: (query: string) => void
@@ -62,14 +64,16 @@ export function Playlist({ songs, totalCount, query, onQueryChange, status, curr
           Playlist
         </h2>
         <p className="text-xs text-muted-foreground" aria-live="polite">
-          {query.trim() ? `${songs.length} of ${totalCount} songs` : `${totalCount} songs`}
+          {songs.length > 0 && songs.length < totalCount
+            ? `top ${songs.length} of ${totalCount} songs`
+            : `${totalCount} songs`}
         </p>
       </div>
 
       <div className="aero-search mt-3 flex items-center gap-2 px-3">
         <Search className="size-4 shrink-0 text-[var(--aero-cyan-deep)]" aria-hidden="true" />
         <label htmlFor="playlist-search" className="sr-only">
-          Search songs, artists, or albums
+          Describe a vibe
         </label>
         <input
           ref={inputRef}
@@ -81,7 +85,7 @@ export function Playlist({ songs, totalCount, query, onQueryChange, status, curr
             if (e.key === 'Escape') onQueryChange('')
             if (e.key === 'Enter' && !e.nativeEvent.isComposing && e.keyCode !== 229 && songs[0]) onSelect(songs[0].id)
           }}
-          placeholder="Search songs, artists, albums…"
+          placeholder="Describe a vibe… (hype, slow, night drive)"
           autoComplete="off"
           className="h-9 min-w-0 flex-1 bg-transparent text-sm text-[var(--aero-navy)] outline-none placeholder:text-[var(--aero-navy)]/45 [&::-webkit-search-cancel-button]:hidden"
         />
@@ -136,7 +140,7 @@ export function Playlist({ songs, totalCount, query, onQueryChange, status, curr
                 }`}
               >
                 <span className="relative size-10 shrink-0 overflow-hidden rounded-md border border-white/90 shadow-sm">
-                  <Image src={song.cover || '/placeholder.svg'} alt="" fill sizes="40px" className="object-cover" />
+                  <CoverImage src={song.cover} fallback={fallbackCover(song.id)} alt="" fill sizes="40px" className="object-cover" />
                   {active && (
                     <span className="absolute inset-0 grid place-items-center bg-[var(--aero-navy)]/40">
                       <Volume2 className={`size-4 text-white ${isPlaying ? 'animate-pulse' : ''}`} aria-hidden="true" />
@@ -156,6 +160,7 @@ export function Playlist({ songs, totalCount, query, onQueryChange, status, curr
                       </>
                     ) : null}
                   </span>
+                  <ScoreBars track={song} className="mt-1 w-full max-w-40" />
                 </span>
                 <span className="shrink-0 text-xs tabular-nums text-muted-foreground">{formatTime(song.duration)}</span>
                 {active && <span className="sr-only">{isPlaying ? '(playing)' : '(paused)'}</span>}

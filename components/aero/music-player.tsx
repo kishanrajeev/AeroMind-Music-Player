@@ -6,9 +6,14 @@ import { TitleBar } from './title-bar'
 import { NowPlaying } from './now-playing'
 import { Playlist } from './playlist'
 import { ControlBar, type RepeatMode } from './control-bar'
+import { BlendSlider } from './blend-slider'
 import { Droplet } from './bubbles'
 
-const RESULT_LIMIT = 10
+/** Query results: the retrieval pool is 30, so this shows all ranked candidates. */
+const QUERY_LIMIT = 30
+
+/** No query: a large n effectively means "the whole library", ranked by taste. */
+const LIBRARY_LIMIT = 1000
 const SEARCH_DEBOUNCE_MS = 300
 
 /** Shown before the first playlist request lands (or when the library is empty). */
@@ -28,6 +33,7 @@ export function MusicPlayer() {
   const audioRef = useRef<HTMLAudioElement>(null)
 
   const [query, setQuery] = useState('')
+  const [alpha, setAlpha] = useState(DEFAULT_ALPHA)
   const [tracks, setTracks] = useState<Track[]>([])
   const [librarySize, setLibrarySize] = useState(0)
   const [status, setStatus] = useState<'loading' | 'ready' | 'error'>('loading')
@@ -51,7 +57,8 @@ export function MusicPlayer() {
     setStatus('loading')
     const timer = setTimeout(
       () => {
-        fetchPlaylist(query, DEFAULT_ALPHA, RESULT_LIMIT, controller.signal)
+        const limit = query.trim() ? QUERY_LIMIT : LIBRARY_LIMIT
+        fetchPlaylist(query, alpha, limit, controller.signal)
           .then((data) => {
             const results = data.tracks.map(toTrack)
             setTracks(results)
@@ -69,7 +76,7 @@ export function MusicPlayer() {
       clearTimeout(timer)
       controller.abort()
     }
-  }, [query])
+  }, [query, alpha])
 
   // Library size, for the "10 of 100 songs" counter.
   useEffect(() => {
@@ -219,8 +226,8 @@ export function MusicPlayer() {
       <Droplet size={9} style={{ top: 82, left: '48%' }} />
       <Droplet size={12} style={{ bottom: 140, right: 18 }} />
 
-      <div className="flex flex-col gap-3 px-3 pb-3">
-        <div className="grid gap-3 md:h-[560px] md:grid-cols-[1fr_minmax(300px,380px)]">
+      <div className="flex flex-col gap-4 px-3 pb-3">
+        <div className="grid gap-3 md:h-[600px] md:grid-cols-[1fr_minmax(300px,380px)]">
           <NowPlaying song={song} isPlaying={isPlaying} />
           <div className="h-[420px] md:h-auto md:min-h-0">
             <Playlist
@@ -235,6 +242,8 @@ export function MusicPlayer() {
             />
           </div>
         </div>
+
+        <BlendSlider alpha={alpha} onAlphaChange={setAlpha} />
 
         <ControlBar
           isPlaying={isPlaying}

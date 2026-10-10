@@ -51,7 +51,9 @@ export type Track = Song & {
   final_score: number
 }
 
-// The API doesn't send cover art, so cycle the bundled album images by track id.
+// Real album art is served by the backend as a thumbnail of the picture embedded
+// in the audio file. The bundled aero images are the fallback when a track has
+// no embedded art (or the backend runs in fixture mode).
 const COVERS = [
   '/images/album-aqua.png',
   '/images/album-meadow.png',
@@ -59,10 +61,14 @@ const COVERS = [
   '/images/album-koi.png',
 ]
 
-function coverFor(id: string) {
+export function fallbackCover(id: string) {
   let hash = 0
   for (let i = 0; i < id.length; i++) hash = (hash * 31 + id.charCodeAt(i)) | 0
   return COVERS[Math.abs(hash) % COVERS.length]
+}
+
+export function coverUrl(trackId: string) {
+  return `${API_BASE}/cover/${encodeURIComponent(trackId)}`
 }
 
 export function toTrack(track: ApiTrack): Track {
@@ -71,7 +77,7 @@ export function toTrack(track: ApiTrack): Track {
     title: track.title,
     artist: track.artist,
     album: '', // not part of the API response yet
-    cover: coverFor(track.id),
+    cover: coverUrl(track.id),
     duration: track.duration,
     clap_score: track.clap_score,
     brain_score: track.brain_score,

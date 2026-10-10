@@ -1,7 +1,8 @@
 import type { CSSProperties } from 'react'
-import Image from 'next/image'
-import type { Song } from '@/lib/songs'
+import { fallbackCover, type Track } from '@/lib/api'
 import { Droplet } from './bubbles'
+import { CoverImage } from './cover-image'
+import { ScoreBars } from './score-bars'
 
 const eqBars = [
   0.9, 0.55, 1.1, 0.7, 1.3, 0.6, 0.95, 1.2, 0.5, 0.85, 1.05, 0.65, 1.15, 0.75, 0.9, 0.6,
@@ -32,14 +33,15 @@ function EqRow({ isPlaying, className }: { isPlaying: boolean; className?: strin
   )
 }
 
-export function NowPlaying({ song, isPlaying }: { song: Song; isPlaying: boolean }) {
+export function NowPlaying({ song, isPlaying }: { song: Track; isPlaying: boolean }) {
   return (
     <section aria-labelledby="now-playing-title" className="aero-glass flex flex-col items-center justify-center gap-5 rounded-2xl p-5 md:p-7">
       <div className="relative">
         <div className="relative size-52 overflow-hidden rounded-xl border border-white/90 shadow-[0_12px_30px_-8px_rgb(0_60_120/0.5),0_0_30px_rgb(47_211_255/0.35)] sm:size-64">
-          <Image
+          <CoverImage
             key={song.cover}
-            src={song.cover || '/placeholder.svg'}
+            src={song.cover}
+            fallback={fallbackCover(song.id)}
             alt={`Album art for ${song.album || song.title}`}
             fill
             sizes="256px"
@@ -58,7 +60,7 @@ export function NowPlaying({ song, isPlaying }: { song: Song; isPlaying: boolean
 
         <div aria-hidden="true" className="relative mt-1 h-16 overflow-hidden sm:h-20">
           <div className="relative size-52 -scale-y-100 overflow-hidden rounded-xl opacity-35 sm:size-64 [mask-image:linear-gradient(to_top,black,transparent_35%)]">
-            <Image src={song.cover || '/placeholder.svg'} alt="" fill sizes="256px" className="object-cover" />
+            <CoverImage src={song.cover} fallback={fallbackCover(song.id)} alt="" fill sizes="256px" className="object-cover" />
           </div>
         </div>
       </div>
@@ -79,6 +81,7 @@ export function NowPlaying({ song, isPlaying }: { song: Song; isPlaying: boolean
             </>
           ) : null}
         </p>
+        <ScoreBars track={song} labelled className="mt-3 w-full max-w-xs text-left" />
       </div>
 
       <div aria-hidden="true" className="aero-eq-well w-full rounded-full px-6 py-2.5">

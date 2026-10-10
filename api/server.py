@@ -251,7 +251,10 @@ def audio(request: Request, track_id: str) -> FileResponse:
             status_code=404,
             detail="fixture mode has no audio files; run without --fixture for /audio",
         )
-    path = Path(_engine(request).audio_path(track_id))
+    try:
+        path = Path(_engine(request).audio_path(track_id))
+    except KeyError as exc:
+        raise HTTPException(status_code=404, detail=f"unknown track_id: {track_id}") from exc
     if not path.exists():
         raise HTTPException(status_code=404, detail=f"audio file missing for {track_id}")
     return FileResponse(path)  # Starlette FileResponse honours Range requests

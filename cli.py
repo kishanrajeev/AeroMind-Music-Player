@@ -132,20 +132,19 @@ def _placeholder_brain_state(track_id: str, rng: random.Random) -> dict:
     }
 
 
-def export_fixtures(placeholder: bool) -> None:
-    if not placeholder:
-        raise SystemExit(
-            "real-engine export arrives with the engine (spec §10 step 2).\n"
-            "Run: python cli.py export-fixture --placeholder"
-        )
-
+def _write_fixtures(fixtures: dict[str, dict]) -> None:
     FIXTURE_DIR.mkdir(parents=True, exist_ok=True)
-    rng = random.Random(FIXTURE_SEED)
+    for name, body in fixtures.items():
+        path = FIXTURE_DIR / f"{name}.json"
+        path.write_text(json.dumps(body, indent=2) + "\n")
+        print(f"wrote {path.relative_to(REPO)}")
 
+
+def _placeholder_fixtures() -> dict[str, dict]:
+    rng = random.Random(FIXTURE_SEED)
     tracks = _placeholder_tracks(rng)
     state = _placeholder_brain_state(tracks[0]["id"], rng)
-
-    fixtures = {
+    return {
         "health": {
             "version": API_VERSION,
             "ok": True,
@@ -173,10 +172,57 @@ def export_fixtures(placeholder: bool) -> None:
         "feedback": {"version": API_VERSION, "ok": True, "brain_state": state},
     }
 
-    for name, body in fixtures.items():
-        path = FIXTURE_DIR / f"{name}.json"
-        path.write_text(json.dumps(body, indent=2) + "\n")
-        print(f"wrote {path.relative_to(REPO)}")
+
+def _real_fixtures() -> dict[str, dict]:
+    """Regenerate api/fixtures/ from the real engine, so shapes never drift."""
+    from dataclasses import asdict
+
+    from core.engine import Engine
+
+    engine = Engine()
+    tracks = engine.library()
+    query = "hype"
+    playlist = engine.playlist(query, DEFAULT_ALPHA, DEFAULT_N)
+    noquery = engine.playlist(None, DEFAULT_ALPHA, DEFAULT_N)
+    state = engine.brain_state(tracks[0].id)
+    return {
+        "health": {
+            "version": API_VERSION,
+            "ok": True,
+            "library_size": len(tracks),
+            "index_loaded": True,
+            "fixture_mode": False,
+        },
+        "library": {
+            "version": API_VERSION,
+            "count": len(tracks),
+            "tracks": [asdict(track) for track in tracks],
+        },
+        "playlist": {
+            "version": API_VERSION,
+            "query": query,
+            "alpha": DEFAULT_ALPHA,
+            "tracks": [asdict(track) for track in playlist],
+        },
+        "playlist_noquery": {
+            "version": API_VERSION,
+            "query": None,
+            "alpha": DEFAULT_ALPHA,
+            "tracks": [asdict(track) for track in noquery],
+        },
+        "brain_state": {"version": API_VERSION, **asdict(state)},
+        "feedback": {"version": API_VERSION, "ok": True, "brain_state": asdict(state)},
+    }
+
+
+def export_fixtures(placeholder: bool) -> None:
+    if placeholder:
+        _write_fixtures(_placeholder_fixtures())
+        print(f"placeholder fixtures ({RETRIEVE_POOL_SIZE} tracks)")
+    else:
+        fixtures = _real_fixtures()
+        _write_fixtures(fixtures)
+        print(f"real fixtures ({fixtures['library']['count']} tracks)")
 
 
 def fetch_playlist(args: argparse.Namespace) -> None:

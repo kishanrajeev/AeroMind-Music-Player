@@ -1,306 +1,918 @@
 {
   "version": "1.0",
-  "count": 30,
+  "count": 114,
   "tracks": [
     {
-      "id": "003e14",
-      "title": "Glass Pavement",
-      "artist": "Aeroform",
-      "duration": 133.9,
-      "path": "/music/003e14.flac",
-      "audio_url": "/audio/003e14",
-      "clap_score": 0.3285,
-      "brain_score": 0.3772
+      "id": "bdc22760",
+      "title": "Stay With Me",
+      "artist": "1nonly",
+      "duration": 141.5,
+      "path": "/mnt/Data/Projects/HackNC/music/English/1nonly - Stay With Me.flac",
+      "audio_url": "/audio/bdc22760"
     },
     {
-      "id": "014a6a",
-      "title": "Tidal Circuit",
-      "artist": "Open Channel",
-      "duration": 168.3,
-      "path": "/music/014a6a.flac",
-      "audio_url": "/audio/014a6a",
-      "clap_score": 0.6611,
-      "brain_score": 0.5365
+      "id": "eb06cc76",
+      "title": "Bunny Girl",
+      "artist": "1nonly",
+      "duration": 166.89999389648438,
+      "path": "/mnt/Data/Projects/HackNC/music/English/1nonly, Ciscaux - Bunny Girl.flac",
+      "audio_url": "/audio/eb06cc76"
     },
     {
-      "id": "02433d",
-      "title": "Velvet Static",
-      "artist": "Blue Static",
-      "duration": 129.3,
-      "path": "/music/02433d.flac",
-      "audio_url": "/audio/02433d",
-      "clap_score": 0.0,
-      "brain_score": 0.0728
+      "id": "30104cd5",
+      "title": "Hex",
+      "artist": "80purppp",
+      "duration": 122.19999694824219,
+      "path": "/mnt/Data/Projects/HackNC/music/English/80purppp - Hex.flac",
+      "audio_url": "/audio/30104cd5"
     },
     {
-      "id": "0307da",
-      "title": "Paper Lanterns",
-      "artist": "Willow Machine",
-      "duration": 214.9,
-      "path": "/music/0307da.flac",
-      "audio_url": "/audio/0307da",
-      "clap_score": 0.8419,
-      "brain_score": 0.2071
+      "id": "299b570e",
+      "title": "Soleil",
+      "artist": "80purppp",
+      "duration": 109.30000305175781,
+      "path": "/mnt/Data/Projects/HackNC/music/English/80purppp - Soleil.flac",
+      "audio_url": "/audio/299b570e"
     },
     {
-      "id": "0426c6",
-      "title": "Slow Orbit",
-      "artist": "Pale Circuit",
-      "duration": 160.7,
-      "path": "/music/0426c6.flac",
-      "audio_url": "/audio/0426c6",
-      "clap_score": 0.2292,
-      "brain_score": 0.7162
+      "id": "7a7ff01c",
+      "title": "One Last Time",
+      "artist": "Ariana Grande",
+      "duration": 197.3000030517578,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Ariana Grande - One Last Time.flac",
+      "audio_url": "/audio/7a7ff01c"
     },
     {
-      "id": "05e143",
-      "title": "Copper Rain",
-      "artist": "Fern & Foam",
-      "duration": 166.7,
-      "path": "/music/05e143.flac",
-      "audio_url": "/audio/05e143",
-      "clap_score": 0.3831,
-      "brain_score": 0.2833
+      "id": "16f90210",
+      "title": "positions",
+      "artist": "Ariana Grande",
+      "duration": 172.3000030517578,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Ariana Grande - positions.flac",
+      "audio_url": "/audio/16f90210"
     },
     {
-      "id": "060a6b",
-      "title": "Neon Bath",
-      "artist": "Vaporlane",
-      "duration": 120.3,
-      "path": "/music/060a6b.flac",
-      "audio_url": "/audio/060a6b",
-      "clap_score": 0.3354,
-      "brain_score": 0.9791
+      "id": "38800de9",
+      "title": "Come Through",
+      "artist": "Bankrol Hayden feat. Lil Tecca",
+      "duration": 112.5999984741211,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Bankrol Hayden, Lil Tecca - Come Through (feat. Lil Tecca).flac",
+      "audio_url": "/audio/38800de9"
     },
     {
-      "id": "07252e",
-      "title": "Soft Antenna",
-      "artist": "Sonant",
-      "duration": 274.4,
-      "path": "/music/07252e.flac",
-      "audio_url": "/audio/07252e",
-      "clap_score": 0.6237,
-      "brain_score": 0.2528
+      "id": "52c08d7a",
+      "title": "That's What I Like",
+      "artist": "Bruno Mars",
+      "duration": 206.6999969482422,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Bruno Mars - That's What I Like.flac",
+      "audio_url": "/audio/52c08d7a"
     },
     {
-      "id": "08e0b7",
-      "title": "Midnight Tape",
-      "artist": "Glasshouse",
-      "duration": 222.8,
-      "path": "/music/08e0b7.flac",
-      "audio_url": "/audio/08e0b7",
-      "clap_score": 0.1402,
-      "brain_score": 1.0
+      "id": "7253401e",
+      "title": "Havana",
+      "artist": "Camila Cabello feat. Young Thug",
+      "duration": 217.3000030517578,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Camila Cabello, Young Thug - Havana (feat. Young Thug).flac",
+      "audio_url": "/audio/7253401e"
     },
     {
-      "id": "099ef1",
-      "title": "Drifting Signal",
-      "artist": "Open Channel",
-      "duration": 214.7,
-      "path": "/music/099ef1.flac",
-      "audio_url": "/audio/099ef1",
-      "clap_score": 0.3738,
-      "brain_score": 0.2
+      "id": "e771790e",
+      "title": "Call Me Maybe",
+      "artist": "Carly Rae Jepsen",
+      "duration": 193.39999389648438,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Carly Rae Jepsen - Call Me Maybe.flac",
+      "audio_url": "/audio/e771790e"
     },
     {
-      "id": "0a1ce1",
-      "title": "Amber Fog",
-      "artist": "Willow Machine",
-      "duration": 240.3,
-      "path": "/music/0a1ce1.flac",
-      "audio_url": "/audio/0a1ce1",
-      "clap_score": 0.4383,
-      "brain_score": 0.3796
+      "id": "72679e15",
+      "title": "Pretty Scene Girl!",
+      "artist": "Clover!",
+      "duration": 132.89999389648438,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Clover! - Pretty Scene Girl!.flac",
+      "audio_url": "/audio/72679e15"
     },
     {
-      "id": "0b8799",
-      "title": "Chrome Garden",
-      "artist": "Aeroform",
-      "duration": 126.6,
-      "path": "/music/0b8799.flac",
-      "audio_url": "/audio/0b8799",
-      "clap_score": 0.793,
-      "brain_score": 0.7312
+      "id": "a4cf6ded",
+      "title": "Say So",
+      "artist": "Doja Cat",
+      "duration": 237.89999389648438,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Doja Cat - Say So.flac",
+      "audio_url": "/audio/a4cf6ded"
     },
     {
-      "id": "0ccb27",
-      "title": "Quiet Tide",
-      "artist": "Fern & Foam",
-      "duration": 153.4,
-      "path": "/music/0ccb27.flac",
-      "audio_url": "/audio/0ccb27",
-      "clap_score": 0.5023,
-      "brain_score": 0.2336
+      "id": "f9afa8a0",
+      "title": "Kiss Me More",
+      "artist": "Doja Cat feat. SZA",
+      "duration": 208.6999969482422,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Doja Cat, SZA - Kiss Me More (feat. SZA).flac",
+      "audio_url": "/audio/f9afa8a0"
     },
     {
-      "id": "0df6fa",
-      "title": "Hollow Bloom",
-      "artist": "Pale Circuit",
-      "duration": 191.4,
-      "path": "/music/0df6fa.flac",
-      "audio_url": "/audio/0df6fa",
-      "clap_score": 0.3044,
-      "brain_score": 0.5131
+      "id": "c35462b0",
+      "title": "Shape of You",
+      "artist": "Ed Sheeran",
+      "duration": 233.6999969482422,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Ed Sheeran - Shape of You.flac",
+      "audio_url": "/audio/c35462b0"
     },
     {
-      "id": "0ec5bd",
-      "title": "Aero Current",
-      "artist": "Vaporlane",
-      "duration": 218.7,
-      "path": "/music/0ec5bd.flac",
-      "audio_url": "/audio/0ec5bd",
-      "clap_score": 0.6001,
-      "brain_score": 0.6506
+      "id": "e47463a3",
+      "title": "Love Me Like You Do (from \u201cFifty Shades of Grey\u201d)",
+      "artist": "Ellie Goulding",
+      "duration": 253.3000030517578,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Ellie Goulding - Love Me Like You Do (From _Fifty Shades Of Grey_).flac",
+      "audio_url": "/audio/e47463a3"
     },
     {
-      "id": "0f2421",
-      "title": "Transparent Room",
-      "artist": "Glasshouse",
-      "duration": 222.2,
-      "path": "/music/0f2421.flac",
-      "audio_url": "/audio/0f2421",
-      "clap_score": 0.1367,
-      "brain_score": 0.638
+      "id": "527780d5",
+      "title": "Cupid (Twin version)",
+      "artist": "FIFTY FIFTY",
+      "duration": 174.3000030517578,
+      "path": "/mnt/Data/Projects/HackNC/music/English/FIFTY FIFTY - Cupid.flac",
+      "audio_url": "/audio/527780d5"
     },
     {
-      "id": "103fb1",
-      "title": "Pale Harbor",
-      "artist": "Sonant",
-      "duration": 125.5,
-      "path": "/music/103fb1.flac",
-      "audio_url": "/audio/103fb1",
-      "clap_score": 0.3231,
-      "brain_score": 0.0
+      "id": "1f2147fb",
+      "title": "Heart in Pieces",
+      "artist": "Future & Lil Uzi Vert",
+      "duration": 196.8000030517578,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Future, Lil Uzi Vert - Heart In Pieces.flac",
+      "audio_url": "/audio/1f2147fb"
     },
     {
-      "id": "11fdcc",
-      "title": "Digital Willow",
-      "artist": "Blue Static",
-      "duration": 287.7,
-      "path": "/music/11fdcc.flac",
-      "audio_url": "/audio/11fdcc",
-      "clap_score": 0.2739,
-      "brain_score": 0.6602
+      "id": "1d5e3d9b",
+      "title": "Closer",
+      "artist": "Halsey; The Chainsmokers",
+      "duration": 245.0,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Halsey, The Chainsmokers - Closer.flac",
+      "audio_url": "/audio/1d5e3d9b"
     },
     {
-      "id": "12e758",
-      "title": "Winter Modem",
-      "artist": "Vaporlane",
-      "duration": 205.0,
-      "path": "/music/12e758.flac",
-      "audio_url": "/audio/12e758",
-      "clap_score": 0.763,
-      "brain_score": 0.5878
+      "id": "d9009bf7",
+      "title": "Down",
+      "artist": "Jay Sean feat. Lil Wayne",
+      "duration": 212.3000030517578,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Jay Sean, Lil Wayne - Down.flac",
+      "audio_url": "/audio/d9009bf7"
     },
     {
-      "id": "138e29",
-      "title": "Blue Vapor",
-      "artist": "Aeroform",
-      "duration": 296.6,
-      "path": "/music/138e29.flac",
-      "audio_url": "/audio/138e29",
-      "clap_score": 0.6798,
-      "brain_score": 0.6896
+      "id": "f1f53b18",
+      "title": "Cigarettes",
+      "artist": "Juice WRLD",
+      "duration": 227.5,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Juice WRLD - Cigarettes.flac",
+      "audio_url": "/audio/f1f53b18"
     },
     {
-      "id": "14c759",
-      "title": "Static Canopy",
-      "artist": "Open Channel",
-      "duration": 285.2,
-      "path": "/music/14c759.flac",
-      "audio_url": "/audio/14c759",
-      "clap_score": 0.0458,
-      "brain_score": 0.5763
+      "id": "b4bc2f7a",
+      "title": "Flaws and Sins",
+      "artist": "Juice WRLD",
+      "duration": 218.3000030517578,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Juice WRLD - Flaws And Sins.flac",
+      "audio_url": "/audio/b4bc2f7a"
     },
     {
-      "id": "1580e3",
-      "title": "Lantern Drift",
-      "artist": "Willow Machine",
-      "duration": 139.4,
-      "path": "/music/1580e3.flac",
-      "audio_url": "/audio/1580e3",
-      "clap_score": 0.2948,
-      "brain_score": 0.4513
+      "id": "11de77da",
+      "title": "Baby",
+      "artist": "Justin Bieber feat. Ludacris",
+      "duration": 214.1999969482422,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Justin Bieber, Ludacris - Baby.flac",
+      "audio_url": "/audio/11de77da"
     },
     {
-      "id": "16f9b5",
-      "title": "Deep Aquarium",
-      "artist": "Fern & Foam",
-      "duration": 145.8,
-      "path": "/music/16f9b5.flac",
-      "audio_url": "/audio/16f9b5",
-      "clap_score": 0.8748,
-      "brain_score": 0.8737
+      "id": "a15c735b",
+      "title": "Heartless",
+      "artist": "Ye",
+      "duration": 211.0,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Kanye West - Heartless.flac",
+      "audio_url": "/audio/a15c735b"
     },
     {
-      "id": "175446",
-      "title": "Copper Orbit",
-      "artist": "Pale Circuit",
-      "duration": 120.6,
-      "path": "/music/175446.flac",
-      "audio_url": "/audio/175446",
-      "clap_score": 0.375,
-      "brain_score": 0.988
+      "id": "e5636c12",
+      "title": "Firework",
+      "artist": "Katy Perry",
+      "duration": 227.89999389648438,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Katy Perry - Firework.flac",
+      "audio_url": "/audio/e5636c12"
     },
     {
-      "id": "18c37d",
-      "title": "Softwave",
-      "artist": "Sonant",
-      "duration": 222.7,
-      "path": "/music/18c37d.flac",
-      "audio_url": "/audio/18c37d",
-      "clap_score": 0.673,
-      "brain_score": 0.5452
+      "id": "a930ad7a",
+      "title": "Just Dance",
+      "artist": "Lady Gaga; Colby O'Donis",
+      "duration": 242.0,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Lady Gaga, Colby O'Donis - Just Dance.flac",
+      "audio_url": "/audio/a930ad7a"
     },
     {
-      "id": "19e0ac",
-      "title": "Aqua Tape",
-      "artist": "Glasshouse",
-      "duration": 249.5,
-      "path": "/music/19e0ac.flac",
-      "audio_url": "/audio/19e0ac",
-      "clap_score": 0.4396,
-      "brain_score": 0.1212
+      "id": "81eedd12",
+      "title": "Your Favorite Dress",
+      "artist": "Lil Tracy & Lil Peep",
+      "duration": 177.39999389648438,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Lil Peep, Lil Tracy - your favorite dress.flac",
+      "audio_url": "/audio/81eedd12"
     },
     {
-      "id": "1aec76",
-      "title": "Quiet Modem",
-      "artist": "Blue Static",
-      "duration": 194.3,
-      "path": "/music/1aec76.flac",
-      "audio_url": "/audio/1aec76",
-      "clap_score": 0.0999,
-      "brain_score": 0.1275
+      "id": "9795746d",
+      "title": "Lust",
+      "artist": "Lil Skies",
+      "duration": 156.0,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Lil Skies - Lust.flac",
+      "audio_url": "/audio/9795746d"
     },
     {
-      "id": "1b9ebc",
-      "title": "Sunrise Server",
-      "artist": "Vaporlane",
-      "duration": 126.9,
-      "path": "/music/1b9ebc.flac",
-      "audio_url": "/audio/1b9ebc",
-      "clap_score": 0.742,
-      "brain_score": 0.4483
+      "id": "39d7401b",
+      "title": "Dark Thoughts",
+      "artist": "Lil Tecca",
+      "duration": 137.0,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Lil Tecca - Dark Thoughts.flac",
+      "audio_url": "/audio/39d7401b"
     },
     {
-      "id": "1c9a4a",
-      "title": "Glass Tide",
-      "artist": "Aeroform",
-      "duration": 223.1,
-      "path": "/music/1c9a4a.flac",
-      "audio_url": "/audio/1c9a4a",
-      "clap_score": 0.5533,
-      "brain_score": 0.336
+      "id": "2ea7d7dd",
+      "title": "In My Head",
+      "artist": "Lil Tjay",
+      "duration": 135.3000030517578,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Lil Tjay - In My Head.flac",
+      "audio_url": "/audio/2ea7d7dd"
     },
     {
-      "id": "1d7a46",
-      "title": "Memory Foam",
-      "artist": "Fern & Foam",
-      "duration": 262.0,
-      "path": "/music/1d7a46.flac",
-      "audio_url": "/audio/1d7a46",
-      "clap_score": 1.0,
-      "brain_score": 0.7735
+      "id": "5bea11a5",
+      "title": "Leaked",
+      "artist": "Lil Tjay",
+      "duration": 220.1999969482422,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Lil Tjay - Leaked.flac",
+      "audio_url": "/audio/5bea11a5"
+    },
+    {
+      "id": "008cfd27",
+      "title": "Sanguine Paradise",
+      "artist": "Lil Uzi Vert",
+      "duration": 244.0,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Lil Uzi Vert - Sanguine Paradise.flac",
+      "audio_url": "/audio/008cfd27"
+    },
+    {
+      "id": "6aea960c",
+      "title": "The Way Life Goes",
+      "artist": "Lil Uzi Vert",
+      "duration": 221.6999969482422,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Lil Uzi Vert, Oh Wonder - The Way Life Goes (feat. Oh Wonder).flac",
+      "audio_url": "/audio/6aea960c"
+    },
+    {
+      "id": "6adecb53",
+      "title": "Animals",
+      "artist": "Maroon 5",
+      "duration": 229.10000610351562,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Maroon 5 - Animals.flac",
+      "audio_url": "/audio/6adecb53"
+    },
+    {
+      "id": "307eaeaa",
+      "title": "Moves Like Jagger",
+      "artist": "Maroon 5; Christina Aguilera",
+      "duration": 201.3000030517578,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Maroon 5, Christina Aguilera - Moves Like Jagger.flac",
+      "audio_url": "/audio/307eaeaa"
+    },
+    {
+      "id": "d03ab61f",
+      "title": "Payphone",
+      "artist": "Maroon 5",
+      "duration": 231.39999389648438,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Maroon 5, Wiz Khalifa - Payphone.flac",
+      "audio_url": "/audio/d03ab61f"
+    },
+    {
+      "id": "b6b8d783",
+      "title": "Party In the U.S.A.",
+      "artist": "Miley Cyrus",
+      "duration": 203.8000030517578,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Miley Cyrus - Party In The U.S.A..flac",
+      "audio_url": "/audio/b6b8d783"
+    },
+    {
+      "id": "9bea489b",
+      "title": "NAVUZIMETRO#PT2",
+      "artist": "NAV and Metro Boomin feat. Lil Uzi Vert",
+      "duration": 260.70001220703125,
+      "path": "/mnt/Data/Projects/HackNC/music/English/NAV, Metro Boomin, Lil Uzi Vert - NAVUZIMETRO#PT2.flac",
+      "audio_url": "/audio/9bea489b"
+    },
+    {
+      "id": "b31431b0",
+      "title": "Better Days",
+      "artist": "NEIKED \u00d7 Mae Muller \u00d7 Polo G",
+      "duration": 160.6999969482422,
+      "path": "/mnt/Data/Projects/HackNC/music/English/NEIKED, Mae Muller, Polo G - Better Days.flac",
+      "audio_url": "/audio/b31431b0"
+    },
+    {
+      "id": "1cb031af",
+      "title": "Super Shy",
+      "artist": "NewJeans",
+      "duration": 154.6999969482422,
+      "path": "/mnt/Data/Projects/HackNC/music/English/NewJeans - Super Shy.flac",
+      "audio_url": "/audio/1cb031af"
+    },
+    {
+      "id": "6bc2de86",
+      "title": "What Makes You Beautiful",
+      "artist": "One Direction",
+      "duration": 200.0,
+      "path": "/mnt/Data/Projects/HackNC/music/English/One Direction - What Makes You Beautiful.flac",
+      "audio_url": "/audio/6bc2de86"
+    },
+    {
+      "id": "ff36f81d",
+      "title": "Guiding Light",
+      "artist": "ROGUE",
+      "duration": 177.60000610351562,
+      "path": "/mnt/Data/Projects/HackNC/music/English/ROGUE - Guiding Light - 01-01 Guiding Light.flac",
+      "audio_url": "/audio/ff36f81d"
+    },
+    {
+      "id": "e591c36e",
+      "title": "Don't Stop The Music",
+      "artist": "Rihanna",
+      "duration": 267.1000061035156,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Rihanna - Don't Stop The Music.flac",
+      "audio_url": "/audio/e591c36e"
+    },
+    {
+      "id": "5a4d4d88",
+      "title": "I LOVE YOU SO",
+      "artist": "Softwilly, Yung Kage, Yumi & Isaacwhy",
+      "duration": 214.0,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Softwilly, Yung Kage, Yumi, Isaacwhy - I LOVE YOU SO.flac",
+      "audio_url": "/audio/5a4d4d88"
+    },
+    {
+      "id": "27a38308",
+      "title": "Lady of Namek",
+      "artist": "Tory Lanez",
+      "duration": 194.0,
+      "path": "/mnt/Data/Projects/HackNC/music/English/TORY LANEZ - Lady Of Namek.flac",
+      "audio_url": "/audio/27a38308"
+    },
+    {
+      "id": "4af89ce5",
+      "title": "Last Kiss of Nebulon",
+      "artist": "Tory Lanez",
+      "duration": 258.70001220703125,
+      "path": "/mnt/Data/Projects/HackNC/music/English/TORY LANEZ - Last Kiss Of Nebulon.flac",
+      "audio_url": "/audio/4af89ce5"
+    },
+    {
+      "id": "76c2a054",
+      "title": "Lavender Sunflower",
+      "artist": "Tory Lanez",
+      "duration": 152.0,
+      "path": "/mnt/Data/Projects/HackNC/music/English/TORY LANEZ - Lavender Sunflower.flac",
+      "audio_url": "/audio/76c2a054"
+    },
+    {
+      "id": "2e25b2dc",
+      "title": "The Color Violet",
+      "artist": "Tory Lanez",
+      "duration": 226.5,
+      "path": "/mnt/Data/Projects/HackNC/music/English/TORY LANEZ - The Color Violet.flac",
+      "audio_url": "/audio/2e25b2dc"
+    },
+    {
+      "id": "e621ab4b",
+      "title": "Pink Dolphin Sunset",
+      "artist": "Tory Lanez feat. Tee",
+      "duration": 212.39999389648438,
+      "path": "/mnt/Data/Projects/HackNC/music/English/TORY LANEZ, Tee - Pink Dolphin Sunset (feat. Tee).flac",
+      "audio_url": "/audio/e621ab4b"
+    },
+    {
+      "id": "278950a0",
+      "title": "Bad Blood",
+      "artist": "Taylor Swift",
+      "duration": 211.89999389648438,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Taylor Swift - Bad Blood.flac",
+      "audio_url": "/audio/278950a0"
+    },
+    {
+      "id": "fd4e5b9a",
+      "title": "We Are Never Ever Getting Back Together",
+      "artist": "Taylor Swift",
+      "duration": 191.89999389648438,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Taylor Swift - We Are Never Ever Getting Back Together.flac",
+      "audio_url": "/audio/fd4e5b9a"
+    },
+    {
+      "id": "6e16bf7c",
+      "title": "Don\u2019t Let Me Down",
+      "artist": "The Chainsmokers",
+      "duration": 208.6999969482422,
+      "path": "/mnt/Data/Projects/HackNC/music/English/The Chainsmokers - Collage - 05 - Don\u2019t Let Me Down.flac",
+      "audio_url": "/audio/6e16bf7c"
+    },
+    {
+      "id": "18e7197a",
+      "title": "STAY",
+      "artist": "The Kid LAROI & Justin Bieber",
+      "duration": 141.8000030517578,
+      "path": "/mnt/Data/Projects/HackNC/music/English/The Kid LAROI, Justin Bieber - STAY.flac",
+      "audio_url": "/audio/18e7197a"
+    },
+    {
+      "id": "7b4afd9d",
+      "title": "WRONG",
+      "artist": "The Kid LAROI feat. Lil Mosey",
+      "duration": 183.60000610351562,
+      "path": "/mnt/Data/Projects/HackNC/music/English/The Kid LAROI, Lil Mosey - WRONG (feat. Lil Mosey).flac",
+      "audio_url": "/audio/7b4afd9d"
+    },
+    {
+      "id": "0259209c",
+      "title": "Blinding Lights",
+      "artist": "The Weeknd",
+      "duration": 200.0,
+      "path": "/mnt/Data/Projects/HackNC/music/English/The Weeknd - Blinding Lights.flac",
+      "audio_url": "/audio/0259209c"
+    },
+    {
+      "id": "a55fadc8",
+      "title": "Starboy",
+      "artist": "The Weeknd, Daft Punk",
+      "duration": 230.5,
+      "path": "/mnt/Data/Projects/HackNC/music/English/The Weeknd, Daft Punk - Starboy.flac",
+      "audio_url": "/audio/a55fadc8"
+    },
+    {
+      "id": "ecc7f599",
+      "title": "Popular",
+      "artist": "The Weeknd with Playboi Carti & Madonna",
+      "duration": 215.5,
+      "path": "/mnt/Data/Projects/HackNC/music/English/The Weeknd, Playboi Carti, Madonna - Popular.flac",
+      "audio_url": "/audio/ecc7f599"
+    },
+    {
+      "id": "9623eb05",
+      "title": "6 Kiss",
+      "artist": "Trippie Redd feat. YNW Melly & Juice WRLD",
+      "duration": 199.39999389648438,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Trippie Redd, Juice WRLD, YNW Melly - 6 Kiss (feat. Juice WRLD & YNW Melly).flac",
+      "audio_url": "/audio/9623eb05"
+    },
+    {
+      "id": "c434097e",
+      "title": "I Really Want to Stay at Your House",
+      "artist": "Rosa Walton",
+      "duration": 246.6999969482422,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Various Artists - Cyberpunk 2077 - Radio, Vol. 2 (Original Soundtrack) - 05 - I Really Want to Stay at Your House.flac",
+      "audio_url": "/audio/c434097e"
+    },
+    {
+      "id": "59e3a12a",
+      "title": "Fuck Love",
+      "artist": "XXXTENTACION feat. Trippie Redd",
+      "duration": 146.5,
+      "path": "/mnt/Data/Projects/HackNC/music/English/XXXTENTACION, Trippie Redd - Fuck Love.flac",
+      "audio_url": "/audio/59e3a12a"
+    },
+    {
+      "id": "b462d232",
+      "title": "Clarity",
+      "artist": "ZEDD; Foxes",
+      "duration": 271.3999938964844,
+      "path": "/mnt/Data/Projects/HackNC/music/English/ZEDD, Foxes - Clarity.flac",
+      "audio_url": "/audio/b462d232"
+    },
+    {
+      "id": "c12bc173",
+      "title": "gone girl",
+      "artist": "iann dior feat. Trippie Redd",
+      "duration": 136.60000610351562,
+      "path": "/mnt/Data/Projects/HackNC/music/English/iann dior, Trippie Redd - gone girl.flac",
+      "audio_url": "/audio/c12bc173"
+    },
+    {
+      "id": "bc8fca47",
+      "title": "The Middle",
+      "artist": "ZEDD; Maren Morris; Grey",
+      "duration": 184.6999969482422,
+      "path": "/mnt/Data/Projects/HackNC/music/English/ZEDD, Maren Morris & Grey - The Middle.flac",
+      "audio_url": "/audio/bc8fca47"
+    },
+    {
+      "id": "5221f768",
+      "title": "Calling",
+      "artist": "Metro Boomin, Swae Lee & NAV feat. A Boogie Wit da Hoodie",
+      "duration": 219.5,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Metro Boomin, Swae Lee, NAV, A Boogie Wit da Hoodie - Calling.flac",
+      "audio_url": "/audio/5221f768"
+    },
+    {
+      "id": "98ae5b6e",
+      "title": "V12",
+      "artist": "iann dior feat. Lil Uzi Vert",
+      "duration": 177.8000030517578,
+      "path": "/mnt/Data/Projects/HackNC/music/English/iann dior, Lil Uzi Vert - V12 (feat. Lil Uzi Vert).flac",
+      "audio_url": "/audio/98ae5b6e"
+    },
+    {
+      "id": "f1878d2a",
+      "title": "Break My Heart",
+      "artist": "Dua Lipa",
+      "duration": 221.8000030517578,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Dua Lipa - Break My Heart.flac",
+      "audio_url": "/audio/f1878d2a"
+    },
+    {
+      "id": "863ca8c4",
+      "title": "Stateside + Zara Larsson",
+      "artist": "PinkPantheress, Zara Larsson",
+      "duration": 184.8000030517578,
+      "path": "/mnt/Data/Projects/HackNC/music/English/PinkPantheress, Zara Larsson - Stateside + Zara Larsson.flac",
+      "audio_url": "/audio/863ca8c4"
+    },
+    {
+      "id": "b9cb14fb",
+      "title": "Bowsette",
+      "artist": "The Chalkeaters",
+      "duration": 240.1999969482422,
+      "path": "/mnt/Data/Projects/HackNC/music/English/The Chalkeaters - Bowsette.flac",
+      "audio_url": "/audio/b9cb14fb"
+    },
+    {
+      "id": "c465e680",
+      "title": "Pixels and Polygons (feat. Coral / VocationalVampire)",
+      "artist": "Yuugen Vinny",
+      "duration": 165.60000610351562,
+      "path": "/mnt/Data/Projects/HackNC/music/English/yukigloom - Pixels and Polygons (feat. Coral \u29f8 VocationalVampire).m4a",
+      "audio_url": "/audio/c465e680"
+    },
+    {
+      "id": "0c50b293",
+      "title": "Bring Me To Life",
+      "artist": "Evanescence",
+      "duration": 235.89999389648438,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Evanescence - Bring Me To Life.flac",
+      "audio_url": "/audio/0c50b293"
+    },
+    {
+      "id": "11329f10",
+      "title": "The One That Got Away",
+      "artist": "Katy Perry",
+      "duration": 227.3000030517578,
+      "path": "/mnt/Data/Projects/HackNC/music/English/The One That Got Away - Katy Perry.flac",
+      "audio_url": "/audio/11329f10"
+    },
+    {
+      "id": "c2ee557d",
+      "title": "Roar",
+      "artist": "Katy Perry",
+      "duration": 223.5,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Roar - Katy Perry.flac",
+      "audio_url": "/audio/c2ee557d"
+    },
+    {
+      "id": "c7054f5e",
+      "title": "Legendary Lovers (Save Me)",
+      "artist": "Katy Perry",
+      "duration": 177.3000030517578,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Legendary Lovers (Save Me) - Katy Perry.flac",
+      "audio_url": "/audio/c7054f5e"
+    },
+    {
+      "id": "932cdd92",
+      "title": "S&M (Album Version)",
+      "artist": "Rihanna",
+      "duration": 243.5,
+      "path": "/mnt/Data/Projects/HackNC/music/English/S&M (Album Version) - Rihanna.flac",
+      "audio_url": "/audio/932cdd92"
+    },
+    {
+      "id": "28f1922d",
+      "title": "NOT CUTE ANYMORE",
+      "artist": "ILLit",
+      "duration": 132.0,
+      "path": "/mnt/Data/Projects/HackNC/music/English/NOT CUTE ANYMORE - ILLit.flac",
+      "audio_url": "/audio/28f1922d"
+    },
+    {
+      "id": "f2d7d38c",
+      "title": "Die With A Smile",
+      "artist": "Lady Gaga, Bruno Mars",
+      "duration": 251.6999969482422,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Die With A Smile - Lady Gaga, Bruno Mars.flac",
+      "audio_url": "/audio/f2d7d38c"
+    },
+    {
+      "id": "785c9728",
+      "title": "Bumble Bee",
+      "artist": "Bambee",
+      "duration": 196.89999389648438,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Bumble Bee - Bambee.flac",
+      "audio_url": "/audio/785c9728"
+    },
+    {
+      "id": "79391826",
+      "title": "34+35",
+      "artist": "Ariana Grande",
+      "duration": 173.6999969482422,
+      "path": "/mnt/Data/Projects/HackNC/music/English/34+35 - Ariana Grande.flac",
+      "audio_url": "/audio/79391826"
+    },
+    {
+      "id": "a2653e20",
+      "title": "E.T.",
+      "artist": "Katy Perry, Kanye West",
+      "duration": 229.60000610351562,
+      "path": "/mnt/Data/Projects/HackNC/music/English/E.T. - Katy Perry, Kanye West.flac",
+      "audio_url": "/audio/a2653e20"
+    },
+    {
+      "id": "0cdb35f7",
+      "title": "Paparazzi",
+      "artist": "Lady Gaga",
+      "duration": 208.1999969482422,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Paparazzi - Lady Gaga.flac",
+      "audio_url": "/audio/0cdb35f7"
+    },
+    {
+      "id": "fa8904ee",
+      "title": "Pressure",
+      "artist": "Paramore",
+      "duration": 185.6999969482422,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Pressure - Paramore.flac",
+      "audio_url": "/audio/fa8904ee"
+    },
+    {
+      "id": "105acf69",
+      "title": "Stereo Hearts (feat. Adam Levine)",
+      "artist": "Gym Class Heroes, Adam Levine",
+      "duration": 211.0,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Stereo Hearts (feat. Adam Levine) - Gym Class Heroes, Adam Levine.flac",
+      "audio_url": "/audio/105acf69"
+    },
+    {
+      "id": "26d5ac67",
+      "title": "bbycakes (with Lil Uzi Vert, PinkPantheress & Shygirl)",
+      "artist": "Mura Masa, Lil Uzi Vert, PinkPantheress, Shygirl",
+      "duration": 173.5,
+      "path": "/mnt/Data/Projects/HackNC/music/English/bbycakes (with Lil Uzi Vert, PinkPantheress & Shygirl) - Mura Masa, Lil Uzi Vert, PinkPantheress, Shygirl.flac",
+      "audio_url": "/audio/26d5ac67"
+    },
+    {
+      "id": "f451ebf3",
+      "title": "Hymn for the Weekend",
+      "artist": "Coldplay",
+      "duration": 258.79998779296875,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Coldplay - Hymn for the Weekend.flac",
+      "audio_url": "/audio/f451ebf3"
+    },
+    {
+      "id": "3d0651b8",
+      "title": "Ditto",
+      "artist": "NewJeans",
+      "duration": 185.5,
+      "path": "/mnt/Data/Projects/HackNC/music/English/NewJeans - Ditto.flac",
+      "audio_url": "/audio/3d0651b8"
+    },
+    {
+      "id": "f454eea0",
+      "title": "Stephanie",
+      "artist": "Nafeesisboujee",
+      "duration": 127.0,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Nafeesisboujee - Stephanie.flac",
+      "audio_url": "/audio/f454eea0"
+    },
+    {
+      "id": "d0a7593f",
+      "title": "LMK",
+      "artist": "Lil XXEL",
+      "duration": 188.3000030517578,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Lil Xxel - LMK.flac",
+      "audio_url": "/audio/d0a7593f"
+    },
+    {
+      "id": "1147c72c",
+      "title": "Legends Never Die",
+      "artist": "League of Legends, Against The Current",
+      "duration": 235.0,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Legends Never Die - League of Legends, Against The Current.flac",
+      "audio_url": "/audio/1147c72c"
+    },
+    {
+      "id": "1df52911",
+      "title": "Sex Sounds",
+      "artist": "Lil Tjay",
+      "duration": 162.5,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Lil Tjay - Sex Sounds.flac",
+      "audio_url": "/audio/1df52911"
+    },
+    {
+      "id": "a0b00f6c",
+      "title": "Mood Swings",
+      "artist": "Pop Smoke feat. Lil Tjay",
+      "duration": 213.3000030517578,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Pop Smoke, Lil Tjay - Mood Swings.flac",
+      "audio_url": "/audio/a0b00f6c"
+    },
+    {
+      "id": "f353d58a",
+      "title": "What You Know Bout Love",
+      "artist": "Pop Smoke",
+      "duration": 160.0,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Pop Smoke - What You Know Bout Love.flac",
+      "audio_url": "/audio/f353d58a"
+    },
+    {
+      "id": "b54d1dc6",
+      "title": "TELL ME WHY",
+      "artist": "The Kid LAROI",
+      "duration": 195.3000030517578,
+      "path": "/mnt/Data/Projects/HackNC/music/English/The Kid LAROI - TELL ME WHY.flac",
+      "audio_url": "/audio/b54d1dc6"
+    },
+    {
+      "id": "f27159ab",
+      "title": "WITHOUT YOU",
+      "artist": "The Kid LAROI",
+      "duration": 161.39999389648438,
+      "path": "/mnt/Data/Projects/HackNC/music/English/The Kid LAROI - WITHOUT YOU.flac",
+      "audio_url": "/audio/f27159ab"
+    },
+    {
+      "id": "a1d772e0",
+      "title": "Close To Me",
+      "artist": "Ellie Goulding, Diplo, Swae Lee",
+      "duration": 182.60000610351562,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Ellie Goulding, Diplo, Swae Lee - Close To Me.flac",
+      "audio_url": "/audio/a1d772e0"
+    },
+    {
+      "id": "d2871883",
+      "title": "crossing field",
+      "artist": "LiSA",
+      "duration": 248.89999389648438,
+      "path": "/mnt/Data/Projects/HackNC/music/02/LiSA - crossing field.flac",
+      "audio_url": "/audio/d2871883"
+    },
+    {
+      "id": "65eb125a",
+      "title": "7 rings",
+      "artist": "Ariana Grande",
+      "duration": 178.60000610351562,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Ariana Grande - 7 rings.flac",
+      "audio_url": "/audio/65eb125a"
+    },
+    {
+      "id": "4d5b1c9c",
+      "title": "Love Story",
+      "artist": "Taylor Swift",
+      "duration": 235.3000030517578,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Taylor Swift - Love Story.flac",
+      "audio_url": "/audio/4d5b1c9c"
+    },
+    {
+      "id": "a4992d7a",
+      "title": "You Belong With Me",
+      "artist": "Taylor Swift",
+      "duration": 231.10000610351562,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Taylor Swift - You Belong With Me.flac",
+      "audio_url": "/audio/a4992d7a"
+    },
+    {
+      "id": "309e0c66",
+      "title": "Style",
+      "artist": "Taylor Swift",
+      "duration": 231.0,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Taylor Swift - Style.flac",
+      "audio_url": "/audio/309e0c66"
+    },
+    {
+      "id": "9f1498fe",
+      "title": "Blank Space",
+      "artist": "Taylor Swift",
+      "duration": 231.8000030517578,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Taylor Swift - Blank Space.flac",
+      "audio_url": "/audio/9f1498fe"
+    },
+    {
+      "id": "d2508b7b",
+      "title": "Still Into You",
+      "artist": "Paramore",
+      "duration": 216.0,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Paramore - Still into You.flac",
+      "audio_url": "/audio/d2508b7b"
+    },
+    {
+      "id": "4ab82922",
+      "title": "Levitating",
+      "artist": "Dua Lipa feat. DaBaby",
+      "duration": 203.10000610351562,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Dua Lipa, DaBaby - Levitating (feat. DaBaby).flac",
+      "audio_url": "/audio/4ab82922"
+    },
+    {
+      "id": "ba45ce4a",
+      "title": "Ai \u0110\u01b0a Em V\u1ec1",
+      "artist": "Tia",
+      "duration": 233.1999969482422,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Tia - Ai \u0110\u01b0a Em V\u1ec1.flac",
+      "audio_url": "/audio/ba45ce4a"
+    },
+    {
+      "id": "96fb1570",
+      "title": "Agora Hills",
+      "artist": "Doja Cat",
+      "duration": 265.3999938964844,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Doja Cat - Agora Hills.flac",
+      "audio_url": "/audio/96fb1570"
+    },
+    {
+      "id": "f46f96e1",
+      "title": "Complicated",
+      "artist": "Avril Lavigne",
+      "duration": 244.5,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Avril Lavigne - Complicated.flac",
+      "audio_url": "/audio/f46f96e1"
+    },
+    {
+      "id": "2d1cfe1d",
+      "title": "Genie In a Bottle",
+      "artist": "Christina Aguilera",
+      "duration": 217.60000610351562,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Christina Aguilera - Genie In a Bottle.flac",
+      "audio_url": "/audio/2d1cfe1d"
+    },
+    {
+      "id": "d479a68f",
+      "title": "Everybody's Fool",
+      "artist": "Evanescence",
+      "duration": 195.89999389648438,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Evanescence - Everybody's Fool.flac",
+      "audio_url": "/audio/d479a68f"
+    },
+    {
+      "id": "e41ca031",
+      "title": "Going Under",
+      "artist": "Evanescence",
+      "duration": 214.89999389648438,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Evanescence - Going Under.flac",
+      "audio_url": "/audio/e41ca031"
+    },
+    {
+      "id": "70e36593",
+      "title": "I Miss The Misery",
+      "artist": "Halestorm",
+      "duration": 183.5,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Halestorm - I Miss The Misery.flac",
+      "audio_url": "/audio/70e36593"
+    },
+    {
+      "id": "be9fc890",
+      "title": "California Gurls",
+      "artist": "Katy Perry; Snoop Dogg",
+      "duration": 234.6999969482422,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Katy Perry, Snoop Dogg - California Gurls.flac",
+      "audio_url": "/audio/be9fc890"
+    },
+    {
+      "id": "e2011fc1",
+      "title": "Last Friday Night (T.G.I.F.)",
+      "artist": "Katy Perry",
+      "duration": 230.6999969482422,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Katy Perry - Last Friday Night (T.G.I.F.).flac",
+      "audio_url": "/audio/e2011fc1"
+    },
+    {
+      "id": "d62907be",
+      "title": "FRIENDS",
+      "artist": "Marshmello & Anne\u2010Marie",
+      "duration": 201.6999969482422,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Marshmello, Anne-Marie - FRIENDS.flac",
+      "audio_url": "/audio/d62907be"
+    },
+    {
+      "id": "9ea379b6",
+      "title": "Side To Side",
+      "artist": "Ariana Grande, Nicki Minaj",
+      "duration": 226.1999969482422,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Ariana Grande, Nicki Minaj - Side To Side.flac",
+      "audio_url": "/audio/9ea379b6"
+    },
+    {
+      "id": "fdfa7871",
+      "title": "Zeli",
+      "artist": "Butterflies",
+      "duration": 166.3000030517578,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Butterflies - Zeli.flac",
+      "audio_url": "/audio/fdfa7871"
+    },
+    {
+      "id": "00757b05",
+      "title": "Deep Dive",
+      "artist": "Alice Syndrome",
+      "duration": 141.0,
+      "path": "/mnt/Data/Projects/HackNC/music/English/Alice Syndrome - Deep Dive.flac",
+      "audio_url": "/audio/00757b05"
     }
   ]
 }

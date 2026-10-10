@@ -28,89 +28,30 @@ REPO = Path(__file__).resolve().parent.parent
 if str(REPO) not in sys.path:
     sys.path.insert(0, str(REPO))
 
-import librosa  # noqa: E402
 import numpy as np  # noqa: E402
-import soundfile as sf  # noqa: E402
 import torch  # noqa: E402
 from transformers import ClapModel, ClapProcessor  # noqa: E402
 
+from core.library import (  # noqa: E402
+    SAMPLE_RATE,
+    duration_seconds,
+    load_segment,
+    parse_playlists,
+    segment_offsets,
+)
+
 MODEL_ID = "laion/clap-htsat-unfused"
-SAMPLE_RATE = 48000
-SEGMENT_SECONDS = 10
-SEGMENT_FRACTIONS = (0.25, 0.50, 0.75)
 CACHE_FILE = REPO / "data" / "mood_probe.npz"
 
 #: Prompt phrasings; the ensemble averages their (normalized) text embeddings.
 TEMPLATES = ("{}", "a {} song", "{} music", "a song that sounds {}")
 
 
-def resolve_entry(entry: str, root: Path) -> Path | None:
-    """Resolve one m3u entry (phone-absolute, absolute, relative, or basename)."""
-    entry = unquote(entry).replace("\\", "/")
-    candidates = []
-    prefix = "/storage/emulated/0/Music/"
-    if entry.startswith(prefix):
-        candidates.append(root / entry[len(prefix) :])
-    if entry.startswith("/"):
-        candidates.append(root / entry.lstrip("/"))
-    candidates.append(root / entry)
-    candidates.append(root / Path(entry).name)
-    return next((c for c in candidates if c.is_file()), None)
-
-
-def parse_playlists(playlists: list[Path], root: Path) -> tuple[list[Path], dict[Path, list[str]]]:
-    """Return deduped resolved tracks (order preserved) and path -> playlist names."""
-    tracks: list[Path] = []
-    labels: dict[Path, list[str]] = {}
-    seen: set[Path] = set()
-    for playlist in playlists:
-        missing = 0
-        for raw in playlist.read_text(errors="replace").splitlines():
-            line = raw.strip()
-            if not line or line.startswith("#"):
-                continue
-            path = resolve_entry(line, root)
-            if path is None:
-                missing += 1
-                continue
-            path = path.resolve()
-            if path not in seen:
-                seen.add(path)
-                tracks.append(path)
-            labels.setdefault(path, []).append(playlist.stem)
-        if missing:
-            print(f"  warning: {playlist.name}: {missing} entries could not be resolved")
-    return tracks, labels
-
-
-def segment_offsets(duration: float) -> list[float]:
-    if duration <= SEGMENT_SECONDS:
-        return [0.0]
-    return [
-        min(max(frac * duration, 0.0), duration - SEGMENT_SECONDS)
-        for frac in SEGMENT_FRACTIONS
-    ]
-
-
-def track_duration(path: Path) -> float:
-    try:
-        info = sf.info(path)
-        return info.frames / info.samplerate
-    except Exception:
-        return float(librosa.get_duration(path=path))
-
-
 def embed_track(path: Path, proc: ClapProcessor, model: ClapModel) -> torch.Tensor:
     """3-segment mean-pooled, L2-normalized CLAP embedding (512,)."""
     embs = []
-    for offset in segment_offsets(track_duration(path)):
-        y, _ = librosa.load(
-            path, sr=SAMPLE_RATE, mono=True, offset=offset, duration=SEGMENT_SECONDS
-        )
-        y = np.asarray(y, dtype=np.float32)
-        target = SAMPLE_RATE * SEGMENT_SECONDS
-        if y.size < target:
-            y = np.pad(y, (0, target - y.size))
+    for offset in segment_offsets(duration_seconds(path)):
+        y = load_segment(path, offset)
         inputs = proc(audio=[y], sampling_rate=SAMPLE_RATE, return_tensors="pt")
         with torch.no_grad():
             embs.append(model.get_audio_features(**inputs).pooler_output[0])

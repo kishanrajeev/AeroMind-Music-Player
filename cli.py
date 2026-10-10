@@ -202,6 +202,50 @@ def fetch_playlist(args: argparse.Namespace) -> None:
         )
 
 
+def cmd_library(args: argparse.Namespace) -> None:
+    import time
+
+    import numpy as np
+
+    from core.library import FEATURE_NAMES, key_label, scan_library
+
+    root = Path(args.music_root).resolve()
+    playlists = [Path(p) for p in args.playlist] if args.playlist else None
+    started = time.time()
+
+    def progress(index: int, count: int, _path: Path) -> None:
+        if index % 25 == 0 or index == count:
+            print(f"  scanned {index}/{count}", file=sys.stderr)
+
+    scanned = scan_library(root, playlists, limit=args.limit or None, on_progress=progress)
+    elapsed = time.time() - started
+
+    print()
+    print(
+        f"{'#':>3}  {'id':8}  {'artist':<20}  {'title':<30}  {'dur':>5}  "
+        f"{'bpm':>6}  {'key':>5}  {'rms':>7}  {'cent':>6}  {'roll':>6}  {'zcr':>5}  {'bw':>6}"
+    )
+    for i, item in enumerate(scanned, 1):
+        track, f = item.track, item.features
+        print(
+            f"{i:>3}  {track.id:8}  {track.artist[:20]:<20}  {track.title[:30]:<30}  "
+            f"{track.duration:5.0f}  {f[0]:6.1f}  {key_label(f):>5}  {f[1]:7.4f}  "
+            f"{f[2]:6.0f}  {f[3]:6.0f}  {f[4]:5.3f}  {f[5]:6.0f}"
+        )
+
+    matrix = (
+        np.stack([item.features for item in scanned])
+        if scanned
+        else np.zeros((0, len(FEATURE_NAMES)))
+    )
+    print()
+    print(f"{len(scanned)} tracks in {elapsed:.1f}s  |  feature matrix {matrix.shape}")
+    if matrix.size:
+        print("raw range per feature (watch for degenerate columns):")
+        for name, lo, hi in zip(FEATURE_NAMES, matrix.min(axis=0), matrix.max(axis=0)):
+            print(f"  {name:>10}: {lo:12.4f} .. {hi:12.4f}")
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     sub = parser.add_subparsers(dest="command", required=True)
@@ -220,6 +264,14 @@ def main() -> None:
     playlist.add_argument("--n", type=int, default=DEFAULT_N)
     playlist.add_argument("--url", default="http://127.0.0.1:8000")
     playlist.set_defaults(func=fetch_playlist)
+
+    library = sub.add_parser("library", help="scan a music root and print the audio-feature table")
+    library.add_argument("--music-root", required=True, help="root the m3u entries resolve against")
+    library.add_argument(
+        "--playlist", nargs="*", default=None, help="m3u file(s); omit to scan the whole root"
+    )
+    library.add_argument("--limit", type=int, default=20, help="max tracks (0 = all)")
+    library.set_defaults(func=cmd_library)
 
     args = parser.parse_args()
     args.func(args)

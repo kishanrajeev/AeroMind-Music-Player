@@ -303,6 +303,32 @@ def cmd_index(args: argparse.Namespace) -> None:
     print(f"  model: {data.meta['model_id']} rev={data.meta['model_revision'] or '(unknown)'}")
 
 
+def cmd_search(args: argparse.Namespace) -> None:
+    from core.index import INDEX_PATH, load_clap, load_index
+    from core.search import QueryEncoder, retrieve
+
+    path = Path(args.index) if args.index else INDEX_PATH
+    index = load_index(path)
+
+    encoder = None
+    if args.query and args.query.strip():
+        processor, model, device = load_clap(args.device)
+        encoder = QueryEncoder(processor, model, device)
+
+    pool = retrieve(index, encoder, args.query, pool_size=args.pool)
+    shown = pool[: args.n]
+    print(
+        f"query={args.query!r}  library={len(index.tracks)}  "
+        f"pool={len(pool)}  showing {len(shown)}"
+    )
+    for rank, candidate in enumerate(shown, 1):
+        track = candidate.track
+        print(
+            f"{rank:2}. clap={candidate.clap_score:.4f} raw={candidate.clap_raw:+.4f}  "
+            f"{track.artist[:24]:<24}  {track.title[:36]}"
+        )
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     sub = parser.add_subparsers(dest="command", required=True)
@@ -340,6 +366,14 @@ def main() -> None:
     index.add_argument("--device", default=None, help="cpu (default) or cuda (ROCm answers as cuda)")
     index.add_argument("--force", action="store_true", help="rebuild even if a valid index exists")
     index.set_defaults(func=cmd_index)
+
+    search = sub.add_parser("search", help="text query -> CLAP candidate pool (no brain yet)")
+    search.add_argument("query", nargs="?", default=None, help="English phrase; omit for a query-less pool")
+    search.add_argument("--n", type=int, default=10)
+    search.add_argument("--pool", type=int, default=RETRIEVE_POOL_SIZE)
+    search.add_argument("--index", default=None)
+    search.add_argument("--device", default=None)
+    search.set_defaults(func=cmd_search)
 
     args = parser.parse_args()
     args.func(args)

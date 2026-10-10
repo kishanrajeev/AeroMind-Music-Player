@@ -12,6 +12,7 @@ numba==0.68.0
 llvmlite==0.50.0
 numpy==2.5.3
 mutagen==1.48.1
+pillow==12.3.0
 scipy==1.18.1
 soundfile==0.14.0
 soxr==1.1.0

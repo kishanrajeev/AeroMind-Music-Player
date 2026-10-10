@@ -133,7 +133,8 @@ def main() -> int:
     code, body = request("GET", "/brain_state?track_id=does-not-exist")
     check("unknown brain_state track -> 404 error shape", code == 404 and is_error(body), f"{code} {body}")
 
-    code, body = request("POST", "/feedback", {"track_id": track_id, "reward": -1})
+    # reward 0: exercises the endpoint without mutating the real brain
+    code, body = request("POST", "/feedback", {"track_id": track_id, "reward": 0})
     check(
         "POST /feedback -> 200 + brain_state",
         code == 200 and (body or {}).get("ok") is True and "brain_state" in (body or {}),
@@ -156,15 +157,27 @@ def main() -> int:
     check("GET /docs -> 200", code == 200)
     code, spec = request("GET", "/openapi.json")
     paths = set((spec or {}).get("paths", {}))
-    expected = {"/health", "/library", "/playlist", "/feedback", "/brain_state", "/audio/{track_id}"}
-    check("OpenAPI lists all six endpoints", expected <= paths, str(sorted(paths)))
+    expected = {
+        "/health",
+        "/library",
+        "/playlist",
+        "/feedback",
+        "/brain_state",
+        "/audio/{track_id}",
+        "/cover/{track_id}",
+    }
+    check("OpenAPI lists all endpoints", expected <= paths, str(sorted(paths)))
 
     if fixture:
         code, body = request("GET", f"/audio/{track_id}")
         check("fixture /audio -> 404 error shape", code == 404 and is_error(body), f"{code} {body}")
+        code, body = request("GET", f"/cover/{track_id}")
+        check("fixture /cover -> 404 error shape", code == 404 and is_error(body), f"{code} {body}")
     else:
         code, _ = request("GET", f"/audio/{track_id}", headers={"Range": "bytes=0-1023"})
         check("real /audio honours Range -> 206", code == 206, f"{code}")
+        code, _ = request("GET", f"/cover/{track_id}")
+        check("real /cover -> 200", code == 200, f"{code}")
 
     print()
     if FAILURES:

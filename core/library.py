@@ -21,6 +21,7 @@ that, persisting mean/std in brain.npz per spec §7).
 from __future__ import annotations
 
 import hashlib
+import io
 import re
 import shutil
 import subprocess
@@ -33,6 +34,7 @@ import librosa
 import mutagen
 import numpy as np
 import soundfile as sf
+from PIL import Image
 
 from core.types import Track
 
@@ -246,6 +248,67 @@ def read_track(path: Path, root: Path) -> Track:
         path=str(path),
         audio_url=f"/audio/{track_id}",
     )
+
+
+# ---------------------------------------------------------------------------
+# cover art
+# ---------------------------------------------------------------------------
+COVER_MAX_SIDE = 512
+
+
+def _sniff_mime(raw: bytes) -> str:
+    if raw[:8] == b"\x89PNG\r\n\x1a\n":
+        return "image/png"
+    if raw[:2] == b"\xff\xd8":
+        return "image/jpeg"
+    if raw[:4] == b"RIFF" and raw[8:12] == b"WEBP":
+        return "image/webp"
+    return "image/jpeg"
+
+
+def embedded_cover(path: Path) -> tuple[bytes, str] | None:
+    """First embedded picture as (bytes, mime), or None."""
+    try:
+        handle = mutagen.File(path)
+        if handle is None:
+            return None
+        pictures = getattr(handle, "pictures", None)  # FLAC
+        if pictures:
+            raw = pictures[0].data
+            return raw, pictures[0].mime or _sniff_mime(raw)
+        tags = getattr(handle, "tags", None)
+        if tags is None:
+            return None
+        getall = getattr(tags, "getall", None)
+        if getall is not None:
+            apic = getall("APIC")  # MP3
+            if apic:
+                raw = apic[0].data
+                return raw, apic[0].mime or _sniff_mime(raw)
+        covr = tags.get("covr")  # M4A
+        if covr:
+            raw = bytes(covr[0])
+            return raw, _sniff_mime(raw)
+    except Exception:
+        return None
+    return None
+
+
+def cover_bytes(path: Path, max_side: int = COVER_MAX_SIDE) -> tuple[bytes, str] | None:
+    """Embedded art as a small JPEG thumbnail, or None when there is none."""
+    cover = embedded_cover(path)
+    if cover is None:
+        return None
+    raw, mime = cover
+    try:
+        with Image.open(io.BytesIO(raw)) as image:
+            image = image.convert("RGB")
+            image.thumbnail((max_side, max_side))
+            buffer = io.BytesIO()
+            image.save(buffer, format="JPEG", quality=85)
+        return buffer.getvalue(), "image/jpeg"
+    except Exception:
+        return raw, mime
 
 
 # ---------------------------------------------------------------------------

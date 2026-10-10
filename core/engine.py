@@ -16,6 +16,7 @@ from __future__ import annotations
 import logging
 import os
 import threading
+from functools import lru_cache
 from pathlib import Path
 
 import numpy as np
@@ -28,6 +29,7 @@ from core.brain import (
     ensure_brain,
 )
 from core.index import INDEX_PATH, IndexData, ensure_index, load_clap
+from core.library import cover_bytes
 from core.scoring import blend, minmax_normalize
 from core.search import QueryEncoder, retrieve
 from core.types import (
@@ -41,6 +43,12 @@ from core.types import (
 )
 
 log = logging.getLogger("hacknc.engine")
+
+
+@lru_cache(maxsize=512)
+def _cover_thumbnail(path: str, mtime_ns: int) -> tuple[bytes, str] | None:
+    """Cached by (path, mtime) so editing a file's art invalidates it."""
+    return cover_bytes(Path(path))
 
 
 def _scan_log(done: int, total: int, _path) -> None:
@@ -123,6 +131,15 @@ class Engine:
 
     def audio_path(self, track_id: str) -> str:
         return self.index.tracks[self._row_by_id[track_id]].path
+
+    def cover(self, track_id: str) -> tuple[bytes, str] | None:
+        """Thumbnail bytes + mime for a track's embedded art, or None."""
+        path = Path(self.index.tracks[self._row_by_id[track_id]].path)
+        try:
+            mtime_ns = path.stat().st_mtime_ns
+        except OSError:
+            return None
+        return _cover_thumbnail(str(path), mtime_ns)
 
     def brain_state(self, track_id: str) -> BrainState:
         row = self._row_by_id[track_id]  # KeyError -> caller maps to 404

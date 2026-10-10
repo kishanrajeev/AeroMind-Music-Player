@@ -20,7 +20,7 @@ from dataclasses import asdict
 from pathlib import Path
 from typing import Any
 
-from fastapi import FastAPI, HTTPException, Query, Request
+from fastapi import FastAPI, HTTPException, Query, Request, Response
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, JSONResponse
@@ -258,6 +258,26 @@ def audio(request: Request, track_id: str) -> FileResponse:
     if not path.exists():
         raise HTTPException(status_code=404, detail=f"audio file missing for {track_id}")
     return FileResponse(path)  # Starlette FileResponse honours Range requests
+
+
+@app.get("/cover/{track_id}", summary="Embedded album art thumbnail")
+def cover(request: Request, track_id: str) -> Response:
+    if FIXTURE_MODE:
+        raise HTTPException(
+            status_code=404, detail="fixture mode has no cover art; run without --fixture"
+        )
+    try:
+        art = _engine(request).cover(track_id)
+    except KeyError as exc:
+        raise HTTPException(status_code=404, detail=f"unknown track_id: {track_id}") from exc
+    if art is None:
+        raise HTTPException(status_code=404, detail=f"no embedded cover for {track_id}")
+    payload, mime = art
+    return Response(
+        content=payload,
+        media_type=mime,
+        headers={"Cache-Control": "public, max-age=3600"},
+    )
 
 
 def main() -> None:

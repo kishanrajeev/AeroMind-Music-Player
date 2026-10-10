@@ -329,6 +329,78 @@ def cmd_search(args: argparse.Namespace) -> None:
         )
 
 
+def _find_track(index, needle: str):
+    for track in index.tracks:
+        if track.id == needle:
+            return track
+    matches = [
+        track
+        for track in index.tracks
+        if needle.lower() in track.title.lower() or needle.lower() in track.artist.lower()
+    ]
+    if len(matches) == 1:
+        return matches[0]
+    if not matches:
+        raise SystemExit(f"no track matches {needle!r}")
+    listing = ", ".join(f"{t.id}:{t.title[:30]}" for t in matches[:8])
+    raise SystemExit(f"ambiguous match for {needle!r}: {listing}")
+
+
+def cmd_brain(args: argparse.Namespace) -> None:
+    import numpy as np
+
+    from core.brain import BRAIN_PATH, ensure_brain
+    from core.index import INDEX_PATH, load_index
+
+    index = load_index(Path(args.index) if args.index else INDEX_PATH)
+    path = Path(args.brain) if args.brain else BRAIN_PATH
+    brain = ensure_brain(index, path=path, force=args.reset)
+
+    if args.feedback is not None:
+        if args.reward is None:
+            raise SystemExit("--feedback requires --reward")
+        track = _find_track(index, args.feedback)
+        row = index.tracks.index(track)
+        before = brain.state(track.id, index.features[row])
+        brain.feedback(index.features[row], args.reward)
+        brain.save(path)
+        after = brain.state(track.id, index.features[row])
+        print(f"feedback reward={args.reward:+d} on {track.artist} - {track.title}")
+        print(f"  mbon {before.mbon_output:.4f} -> {after.mbon_output:.4f}")
+        print(f"  feedback_count {before.feedback_count} -> {after.feedback_count}")
+        return
+
+    if args.state:
+        track = _find_track(index, args.state)
+        row = index.tracks.index(track)
+        state = brain.state(track.id, index.features[row])
+        active = sum(1 for value in state.kc_activity if value > 0)
+        print(f"brain state for {track.artist} - {track.title} [{track.id}]")
+        print(f"  mbon_output:    {state.mbon_output:.4f}")
+        print(f"  kc active:      {active}/{len(state.kc_activity)}")
+        print(f"  weights norm:   {np.linalg.norm(np.asarray(state.weights)):.4f}")
+        print(f"  feedback_count: {state.feedback_count}")
+        return
+
+    valences = brain.valences(index.features)
+    outputs = 1.0 / (1.0 + np.exp(-valences))
+    learned = int(np.count_nonzero(brain.weights))
+    print(f"brain OK: {len(index.tracks)} tracks -> {path}")
+    print(
+        f"  kc:             {brain.active_count}/{len(brain.weights)} active "
+        f"({float(brain.meta['kc_active_fraction']) * 100:.0f}%)"
+    )
+    print(f"  feedback_count: {brain.feedback_count}")
+    print(
+        f"  learned cells:  {learned}/{len(brain.weights)} nonzero  "
+        f"|w|={np.linalg.norm(brain.weights):.4f}"
+    )
+    print(
+        f"  mbon:           sigmoid {outputs.min():.4f}..{outputs.max():.4f}  "
+        f"(raw {valences.min():+.4f}..{valences.max():+.4f})"
+    )
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     sub = parser.add_subparsers(dest="command", required=True)
@@ -374,6 +446,15 @@ def main() -> None:
     search.add_argument("--index", default=None)
     search.add_argument("--device", default=None)
     search.set_defaults(func=cmd_search)
+
+    brain = sub.add_parser("brain", help="mushroom body: status, feedback, state")
+    brain.add_argument("--index", default=None)
+    brain.add_argument("--brain", default=None)
+    brain.add_argument("--reset", action="store_true", help="discard learned weights and rebuild")
+    brain.add_argument("--feedback", metavar="TRACK", default=None, help="track id or title substring")
+    brain.add_argument("--reward", type=int, choices=[-1, 0, 1], default=None)
+    brain.add_argument("--state", metavar="TRACK", default=None, help="show state for one track")
+    brain.set_defaults(func=cmd_brain)
 
     args = parser.parse_args()
     args.func(args)

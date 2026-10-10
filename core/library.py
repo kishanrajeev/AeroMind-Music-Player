@@ -145,8 +145,13 @@ def collect_paths(
 # audio loading
 # ---------------------------------------------------------------------------
 def segment_offsets(duration: float) -> list[float]:
+    """Window start offsets at 25/50/75% of the track, clamped so each 10 s window fits.
+
+    Always returns ``len(SEGMENT_FRACTIONS)`` offsets so index arrays have a
+    fixed shape; very short tracks just repeat the start.
+    """
     if duration <= SEGMENT_SECONDS:
-        return [0.0]
+        return [0.0] * len(SEGMENT_FRACTIONS)
     return [
         min(max(frac * duration, 0.0), duration - SEGMENT_SECONDS)
         for frac in SEGMENT_FRACTIONS

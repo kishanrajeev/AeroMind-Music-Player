@@ -246,6 +246,63 @@ def cmd_library(args: argparse.Namespace) -> None:
             print(f"  {name:>10}: {lo:12.4f} .. {hi:12.4f}")
 
 
+def cmd_index(args: argparse.Namespace) -> None:
+    import time
+
+    import numpy as np
+
+    from core.index import INDEX_PATH, IndexMismatch, build_index, load_index, save_index
+
+    out = Path(args.out) if args.out else INDEX_PATH
+    if out.exists() and not args.force:
+        try:
+            data = load_index(out)
+        except IndexMismatch as exc:
+            print(f"stale index ({exc}) — rebuilding", file=sys.stderr)
+        else:
+            norms = np.linalg.norm(data.embeddings, axis=1)
+            print(f"index OK: {len(data.tracks)} tracks")
+            print(f"  path:         {out}")
+            print(f"  embeddings:   {data.embeddings.shape} (norm {norms.min():.4f}..{norms.max():.4f})")
+            print(f"  features:     {data.features.shape}")
+            print(f"  created_at:   {data.meta.get('created_at')}")
+            model = f"{data.meta.get('model_id')} rev={data.meta.get('model_revision') or '(unknown)'}"
+            print(f"  model:        {model}")
+            print(f"  transformers: {data.meta.get('transformers_version')}")
+            return
+
+    if not args.music_root:
+        raise SystemExit("--music-root is required to build an index")
+
+    root = Path(args.music_root).resolve()
+    playlists = [Path(p) for p in args.playlist] if args.playlist else None
+    started = time.time()
+
+    def on_scan(index: int, count: int, _path: Path) -> None:
+        if index % 25 == 0 or index == count:
+            print(f"  scanned {index}/{count}", file=sys.stderr)
+
+    def on_embed(index: int, count: int) -> None:
+        if index % 25 == 0 or index == count:
+            print(f"  embedded {index}/{count}", file=sys.stderr)
+
+    data = build_index(
+        root,
+        playlists,
+        limit=args.limit or None,
+        on_scan=on_scan,
+        on_embed=on_embed,
+        device=args.device,
+    )
+    save_index(data, out)
+    print(f"built index: {len(data.tracks)} tracks in {time.time() - started:.1f}s -> {out}")
+    print(
+        f"  embeddings {data.embeddings.shape}  features {data.features.shape}  "
+        f"offsets {data.offsets.shape}"
+    )
+    print(f"  model: {data.meta['model_id']} rev={data.meta['model_revision'] or '(unknown)'}")
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     sub = parser.add_subparsers(dest="command", required=True)
@@ -272,6 +329,17 @@ def main() -> None:
     )
     library.add_argument("--limit", type=int, default=20, help="max tracks (0 = all)")
     library.set_defaults(func=cmd_library)
+
+    index = sub.add_parser("index", help="build/load data/index.npz (CLAP embeddings + features)")
+    index.add_argument("--music-root", default=None, help="required to build; not needed to inspect")
+    index.add_argument(
+        "--playlist", nargs="*", default=None, help="m3u file(s); omit to scan the whole root"
+    )
+    index.add_argument("--limit", type=int, default=0, help="max tracks (0 = all)")
+    index.add_argument("--out", type=Path, default=None, help="index path (default data/index.npz)")
+    index.add_argument("--device", default=None, help="cpu (default) or cuda (ROCm answers as cuda)")
+    index.add_argument("--force", action="store_true", help="rebuild even if a valid index exists")
+    index.set_defaults(func=cmd_index)
 
     args = parser.parse_args()
     args.func(args)

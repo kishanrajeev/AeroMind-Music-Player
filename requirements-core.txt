@@ -1,0 +1,7 @@
+# Core stack required only for real engine mode (index / search / brain).
+-r requirements.txt
+torch
+transformers
+librosa
+numpy
+soundfile

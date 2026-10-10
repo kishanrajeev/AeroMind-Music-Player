@@ -1,0 +1,28 @@
+# --- spec §11: media and generated data never enter git ---
+data/
+music/
+*.flac
+*.wav
+*.mp3
+*.m4a
+*.ogg
+*.aiff
+
+# --- python ---
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# --- editor / os ---
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+README.md

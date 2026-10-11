@@ -410,6 +410,7 @@ def cmd_brain(args: argparse.Namespace) -> None:
         before = brain.state(track.id, index.features[row])
         brain.feedback(index.features[row], args.reward)
         brain.save(path)
+        brain.calibrate(index.features)
         after = brain.state(track.id, index.features[row])
         print(f"feedback reward={args.reward:+d} on {track.artist} - {track.title}")
         print(f"  mbon {before.mbon_output:.4f} -> {after.mbon_output:.4f}")
@@ -429,12 +430,13 @@ def cmd_brain(args: argparse.Namespace) -> None:
         return
 
     valences = brain.valences(index.features)
-    outputs = 1.0 / (1.0 + np.exp(-valences))
+    outputs = brain.outputs(index.features)
     learned = int(np.count_nonzero(brain.weights))
+    counts = brain.active_counts(index.features)
     print(f"brain OK: {len(index.tracks)} tracks -> {path}")
     print(
-        f"  kc:             {brain.active_count}/{len(brain.weights)} active "
-        f"({float(brain.meta['kc_active_fraction']) * 100:.0f}%)"
+        f"  kc:             {counts.min()}-{counts.max()}/{len(brain.weights)} active "
+        f"(~{float(brain.meta['kc_active_fraction']) * 100:.1f}% per track)"
     )
     print(f"  feedback_count: {brain.feedback_count}")
     print(

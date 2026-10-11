@@ -23,7 +23,7 @@ import numpy as np
 
 from core.brain import (
     BRAIN_PATH,
-    DEFAULT_ETA,
+    DEFAULT_DRIVE,
     DEFAULT_SEED,
     Brain,
     ensure_brain,
@@ -69,7 +69,7 @@ class Engine:
         index_path: Path = INDEX_PATH,
         brain_path: Path = BRAIN_PATH,
         device: str | None = None,
-        eta: float = DEFAULT_ETA,
+        drive: float = DEFAULT_DRIVE,
         seed: int = DEFAULT_SEED,
         warm: bool = True,
     ):
@@ -92,7 +92,7 @@ class Engine:
 
         self._brain_path = Path(brain_path)
         self.brain: Brain = ensure_brain(
-            self.index, path=self._brain_path, eta=eta, seed=seed
+            self.index, path=self._brain_path, drive=drive, seed=seed
         )
         self._brain_stamp = self._brain_mtime()
         log.info("brain ready: %d feedback signals", self.brain.feedback_count)
@@ -146,6 +146,8 @@ class Engine:
         row = self._row_by_id[track_id]  # KeyError -> caller maps to 404
         with self._brain_lock:
             self._sync_brain()
+            if not self.brain.calibrated:
+                self.brain.calibrate(self.index.features)
             return self.brain.state(track_id, self.index.features[row])
 
     # -- main call ----------------------------------------------------------
@@ -209,4 +211,6 @@ class Engine:
             if reward != 0:
                 self.brain.save(self._brain_path)
                 self._brain_stamp = self._brain_mtime()
+                # Weights moved, so the library-relative readout must be refreshed.
+                self.brain.calibrate(self.index.features)
             return self.brain.state(track_id, features)

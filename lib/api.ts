@@ -112,10 +112,20 @@ export function fetchBrainState(trackId: string, signal?: AbortSignal) {
 }
 
 /** Fire-and-forget learning signal: -1 skip, +1 listen-through, 0 neutral. */
-export function postFeedback(trackId: string, reward: -1 | 0 | 1) {
+export type FeedbackResponse = {
+  version: string
+  ok: boolean
+  brain_state: BrainState
+}
+
+/** Teach the brain; the response carries the updated state for the fed-back track. */
+export function postFeedback(trackId: string, reward: -1 | 0 | 1): Promise<FeedbackResponse> {
   return fetch(`${API_BASE}/feedback`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ track_id: trackId, reward }),
-  }).then(() => undefined)
+  }).then((res) => {
+    if (!res.ok) throw new Error(`POST /feedback failed with ${res.status}`)
+    return res.json() as Promise<FeedbackResponse>
+  })
 }

@@ -1,13 +1,16 @@
 'use client'
 
-import { useEffect, useEffectEvent, useRef, useState } from 'react'
-import { DEFAULT_ALPHA, audioUrl, fetchHealth, fetchPlaylist, postFeedback, toTrack, type Track } from '@/lib/api'
+import { useCallback, useEffect, useEffectEvent, useRef, useState } from 'react'
+import { Brain } from 'lucide-react'
+import { DEFAULT_ALPHA, audioUrl, fetchHealth, fetchPlaylist, toTrack, type Track } from '@/lib/api'
+import { postFeedback } from '@/lib/feedback'
 import { TitleBar } from './title-bar'
 import { NowPlaying } from './now-playing'
 import { Playlist } from './playlist'
 import { ControlBar, type RepeatMode } from './control-bar'
 import { BlendSlider } from './blend-slider'
 import { Droplet } from './bubbles'
+import { BrainView } from './brain-view'
 import { getDesktop } from '@/lib/desktop'
 
 /** Query results: the retrieval pool is 30, so this shows all ranked candidates. */
@@ -46,6 +49,8 @@ export function MusicPlayer() {
   const [muted, setMuted] = useState(false)
   const [shuffle, setShuffle] = useState(false)
   const [repeat, setRepeat] = useState<RepeatMode>('off')
+  const [view, setView] = useState<'player' | 'brain'>('player')
+  const showPlayer = useCallback(() => setView('player'), [])
 
   const song = current ?? NOTHING_QUEUED
   const currentIndex = current ? tracks.findIndex((t) => t.id === current.id) : -1
@@ -233,23 +238,40 @@ export function MusicPlayer() {
       <Droplet size={12} style={{ bottom: 140, right: 18 }} />
 
       <div className="aero-player-body flex flex-col gap-4 px-3 pb-3">
-        <div className="aero-player-grid grid gap-3 md:h-[600px] md:grid-cols-[1fr_minmax(300px,380px)]">
-          <NowPlaying song={song} isPlaying={isPlaying} />
-          <div className="h-[420px] md:h-auto md:min-h-0">
-            <Playlist
-              songs={tracks}
-              totalCount={librarySize || tracks.length}
-              query={query}
-              onQueryChange={setQuery}
-              status={status}
-              currentId={song.id}
-              isPlaying={isPlaying}
-              onSelect={playSong}
-            />
+        {/* Hidden, not unmounted, while the brain view is open: the player keeps its state and scroll. */}
+        <div className={view === 'player' ? 'flex min-h-0 flex-1 flex-col gap-4' : 'hidden'}>
+          <div className="aero-player-grid grid gap-3 md:h-[600px] md:grid-cols-[1fr_minmax(300px,380px)]">
+            <NowPlaying song={song} isPlaying={isPlaying} />
+            <div className="h-[420px] md:h-auto md:min-h-0">
+              <Playlist
+                songs={tracks}
+                totalCount={librarySize || tracks.length}
+                query={query}
+                onQueryChange={setQuery}
+                status={status}
+                currentId={song.id}
+                isPlaying={isPlaying}
+                onSelect={playSong}
+              />
+            </div>
+          </div>
+
+          <div className="flex items-center gap-3">
+            <div className="min-w-0 flex-1">
+              <BlendSlider alpha={alpha} onAlphaChange={setAlpha} />
+            </div>
+            <button
+              type="button"
+              onClick={() => setView('brain')}
+              className="aero-pill inline-flex h-9 shrink-0 items-center gap-1.5 px-3 text-xs font-semibold text-[var(--aero-navy)]"
+            >
+              <Brain className="size-3.5" aria-hidden="true" />
+              Mushroom Body
+            </button>
           </div>
         </div>
 
-        <BlendSlider alpha={alpha} onAlphaChange={setAlpha} />
+        {view === 'brain' && <BrainView song={song} onBack={showPlayer} />}
 
         <ControlBar
           isPlaying={isPlaying}

@@ -8,6 +8,7 @@ import { Playlist } from './playlist'
 import { ControlBar, type RepeatMode } from './control-bar'
 import { BlendSlider } from './blend-slider'
 import { Droplet } from './bubbles'
+import { getDesktop } from '@/lib/desktop'
 
 /** Query results: the retrieval pool is 30, so this shows all ranked candidates. */
 const QUERY_LIMIT = 30
@@ -121,6 +122,11 @@ export function MusicPlayer() {
     audio.muted = muted
   }, [volume, muted])
 
+  // Desktop app: the native title bar shows the text the old in-window title bar showed.
+  useEffect(() => {
+    if (getDesktop()) document.title = `Aero Media Player — ${song.title} — ${song.artist}`
+  }, [song.title, song.artist])
+
   function playSong(id: string) {
     const track = tracks.find((t) => t.id === id)
     if (!track) return
@@ -226,8 +232,8 @@ export function MusicPlayer() {
       <Droplet size={9} style={{ top: 82, left: '48%' }} />
       <Droplet size={12} style={{ bottom: 140, right: 18 }} />
 
-      <div className="flex flex-col gap-4 px-3 pb-3">
-        <div className="grid gap-3 md:h-[600px] md:grid-cols-[1fr_minmax(300px,380px)]">
+      <div className="aero-player-body flex flex-col gap-4 px-3 pb-3">
+        <div className="aero-player-grid grid gap-3 md:h-[600px] md:grid-cols-[1fr_minmax(300px,380px)]">
           <NowPlaying song={song} isPlaying={isPlaying} />
           <div className="h-[420px] md:h-auto md:min-h-0">
             <Playlist

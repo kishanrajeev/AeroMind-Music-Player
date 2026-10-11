@@ -2,7 +2,7 @@ import { Droplet, Minus, Square, X } from 'lucide-react'
 
 export function TitleBar({ nowPlaying }: { nowPlaying: string }) {
   return (
-    <header className="relative flex h-11 items-center justify-between gap-3 px-3">
+    <header className="aero-titlebar relative flex h-11 items-center justify-between gap-3 px-3">
       <div className="flex min-w-0 items-center gap-2">
         <span className="aero-orb grid size-6 shrink-0 place-items-center" aria-hidden="true">
           <Droplet className="relative size-3.5" fill="currentColor" />

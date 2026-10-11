@@ -535,3 +535,56 @@
     display: none;
   }
 }
+
+/* ---------- Desktop shell (Electron) ---------- */
+
+/* electron/preload.js sets data-aero-shell and data-aero-blur on <html>; normal browsers never do.
+   The native window draws the title bar, so the page is only the player: no in-page title bar
+   and no margins around it. */
+html[data-aero-shell='desktop'] .aero-titlebar {
+  display: none;
+}
+
+html[data-aero-shell='desktop'] .aero-page {
+  height: 100dvh;
+  padding: 0;
+}
+
+html[data-aero-shell='desktop'] .aero-player-slot {
+  max-width: none;
+  height: 100%;
+}
+
+html[data-aero-shell='desktop'] .aero-window {
+  max-width: none;
+  height: 100%;
+  border-radius: 0;
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.95),
+    inset 0 0 0 1px rgb(255 255 255 / 0.25);
+}
+
+html[data-aero-shell='desktop'] .aero-player-body {
+  height: 100%;
+  padding-top: 12px;
+}
+
+/* The two panels take the window height; the controls stay at the bottom. */
+html[data-aero-shell='desktop'] .aero-player-grid {
+  flex: 1 1 auto;
+  height: auto;
+  min-height: 600px;
+}
+
+/* Glass mode (`npm run desktop:glass`): the window is see-through and the compositor
+   blurs the real desktop behind it, so the built-in wallpaper is dropped.
+   electron/preload.js sets data-aero-blur on <html>; normal browsers never do. */
+html[data-aero-blur='glass'],
+html[data-aero-blur='glass'] body {
+  background: transparent;
+}
+
+html[data-aero-blur='glass'] .aero-wallpaper,
+html[data-aero-blur='glass'] .aero-wallpaper-tint {
+  display: none;
+}

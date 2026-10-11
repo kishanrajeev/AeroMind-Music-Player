@@ -2,7 +2,7 @@
 
 > A music player that learns your taste with a simulated fruit-fly mushroom body.
 
-Type a mood — *"aggressive"*, *"hype, slow, night drive"* — and AeroMind finds songs by how they, not how they're tagged. It then re-ranks the results through a simulated Drosophila mushroom body that learns from every skip and listen, with a live visualization of the 2000-neuron circuit thinking in real time.
+Type a mood: *"aggressive"*, *"hype, slow, night drive"* and AeroMind finds songs by how they sound, not how they're tagged. It then re-ranks the results through a simulated Drosophila mushroom body that learns from every skip and listen, with a live visualization of the 2000-neuron circuit thinking in real time.
 
 ---
 
